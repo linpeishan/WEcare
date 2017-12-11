@@ -1,0 +1,82 @@
+<!---aka create_publications -->
+{% extends 'layout.html' %}
+{% block body %}
+    {% from "includes/_Booking_Page_Helper.html" import render_field %}
+    <!---JQuery -->
+    <!---Start --->
+    <script>
+        $(document).ready(function () {
+            $('#doctor').show();
+            $('#instructor').hide();
+            $('input[type="radio"]').click(function () {
+                if ($(this).attr('value') == 'idoctor') {
+                    $('#doctor').show();
+                    $('#instructor').hide();
+                }
+                else {
+                    $('#instructor').show();
+                    $('#doctor').hide();
+                }
+            });
+        });
+    </script>
+    <!---End --->
+    <!---Display errors--->
+    <!---Start--->
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+                {% for error in field_errors %}
+                    <li>{{ form[field_name].label }}: {{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    <!---End--->
+    <center>
+    <form method="POST" action="">
+
+        <table class="table table-user-information" style="width:500px">
+            <tbody>
+                <tr>
+                    <td>{{ render_field(form.type,class_="radio-inline") }}</td>
+                </tr>
+                <tr>
+                    <td>{{ render_field(form.name,class_="form-control") }}</td>
+                </tr>
+                <tr>
+                    <td>{{ render_field(form.age,class_="form-control") }}</td>
+                </tr>
+                <tr>
+                    <td>{{ render_field(form.phoneNumber,class_="form-control") }}</td>
+                </tr>
+                <tr>
+                    <td>{{ render_field(form.email,class_="form-control") }}</td>
+                </tr>
+
+                <tr id="doctor">
+                    <td>{{ render_field(form.specialization1,class_="form-control") }}</td>
+                </tr>
+
+
+                <tr id="instructor">
+                    <td>{{ render_field(form.specialization2,class_="form-control") }}</td>
+                </tr>
+
+                <tr>
+                    <td>{{ render_field(form.startingDateAndTime,class_="form-control") }}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class = "form-group col-md-1">
+                            <input type="submit" value="Submit" class="btn btn-info"/>
+                        </div>
+                    </td>
+                </tr>
+           </tbody>
+        </table>
+    </form>
+    </center>
+{% endblock %}

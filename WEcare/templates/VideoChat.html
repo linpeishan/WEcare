@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+    <!--- BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+  </head>
+  {% extends 'layout.html' %}
+  {% block body %}
+
+  <center>
+  <br>
+  <h1 class="onlineVideo"> Online Video Consultation </h1>
+  <hr>
+
+  <p id = "note2"> Hi, welcome to our Online Video Consultation! Simply press <strong><em>call</em></strong> to contact our doctors! </p>
+  <p id = "note2"> Please <strong><em>enable</em></strong> your microphone and camera. </p>
+  <p id = "note2"> If your computer does not have one,you can still communicate with the doctor as they will be operating their microphone and camera. </p>
+  <p id = "note2"> Press <strong><span id="key">Enter</span></strong> to view full screen. Press <strong><span id="key"> Esc </span></strong> &nbsp;to exit. </p>
+  <p id = "note2"> To <strong><em>hang up</em></strong> the Video Call, simply <strong><em>close the browser</em></strong>! </p>
+  <hr>
+  <body onload="showLocalVideo()">
+    <video id="localVideo" autoplay muted></video>
+    <video id="remoteVideo" autoplay></video>
+    <br />
+    <button onclick="showRemoteVideo()" type="button" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span> Call</button>
+	</center>
+	<br>
+	<br>
+	<small id="note"><strong> *****Please note that this video chat does not support Internet Explorer and Firefox. *****</strong></small>
+	<br>
+	<br>
+	<script src="static/js/script.js"></script>
+  {% endblock %}
+  </body>
+</html>
