@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- Chat Box CSS -->
+ <link href="css/chat_box.css" rel="stylesheet" type="text/css">
+
+<!-- Footer Css! -->
+<!-- <link href="css/footer_css.css" rel="stylesheet" type="text/css"> -->
+
+<!-- From Profile Page. Impt to have this. Makes the font look nicer-->
+<!-- <link rel="stylesheet" type="text/css" media="all" href="css/styles.css"> -->
+
+<title>WEcare</title>
+<style>
+/* NavBar CSS */
+.navbar-toggle {
+    position: relative;
+    float: right;
+    padding: 9px 10px;
+    margin-top: 8px;
+    margin-right: 15px;
+    margin-bottom: 8px;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: none;
+    border: 1px solid rgb(0, 0, 0);
+		border-radius: 4px;
+	}
+	a:visited{
+		text-decoration:none;
+		
+	}
+
+	a:link{
+		text-decoration:none;
+		color:black;
+	}
+
+	a:active{
+		text-decoration:none;
+		color:black;
+	}
+	.navbar {
+		font-family: Century Gothic;
+		background-color: rgb(217, 217, 217)
+	}
+	.navbar a {
+		float: left;
+		font-size: 16px;
+		color: black;
+		text-align: center;
+		padding: 14px 32px;
+		text-decoration: none;
+	}
+	.dropdown-content {
+		display: none;
+		position: absolute;
+		background-color: #f9f9f9;
+		min-width: 160px;
+		box-shadow: 0px 0px 0px 0px ;
+		z-index: 1;
+	}
+	.dropdown-content a {
+		float: none;
+		color: white;
+		padding: 12px 16px;
+		text-decoration: none;
+		display: block;
+		text-align: left;
+	}
+/* NavBar CSS End */
+
+</style>
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav style="background-color: rgb(217, 217, 217);" class="navbar .navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button style="color: black;" type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span style="background-color: black !important;" class="icon-bar"></span>
+      <span style="background-color: black !important;" class="icon-bar"></span>
+      <span style="background-color: black !important;" class="icon-bar"></span>
+    </button>	
+    
+  </div>
+
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav">
+	  <li><a style="padding: 0px" href="Homepage.html"><img style="height: 50px;width: 93px;" src="Compiled\images\Website Logo.png"></a></li>
+      <li class="active"><a href="Profile Page - Compiled.html" style="color:black; font-family:Century Gothic; font-size:17px;">Profile</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"style="color:black; font-family:Century Gothic; font-size:17px;">Online Consultation <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="Doctor's Page - Compiled.html" style="color:black; font-family:Century Gothic; font-size:17px;">Doctors</a></li>
+        </ul>
+      </li>
+	  <li><a href="#" style="color:black; font-family:Century Gothic; font-size:17px;">Online Lessons</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:black; font-family:Century Gothic; font-size:17px;">Health Tips <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="#" style="color:black; font-family:Century Gothic; font-size:17px;">Tips on Dietary</a></li>
+		  <li><a href="#" style="color:black; font-family:Century Gothic; font-size:17px;">Tips on Fitness</a></li>
+        </ul>
+      </li>
+	    <li><a href="Query - Compiled.html" style="color:black; font-family:Century Gothic; font-size:17px;">Query</a></li>
+		<li><a href="feedback - Compiled.html" style="color:black; font-family:Century Gothic; font-size:17px;">Review </a></li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+			<div class="yay">
+				<div class="btn-group btn-group-lg">
+					<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-user"></span> Sign up</button>
+					<button type="button" class="btn btn-info"><span class="glyphicon glyphicon-log-in"> Login</button>
+					<button type="button" class="btn btn-success"><span class="glyphicon glyphicon-bell">
+					</button>
+				</div>
+			</div>
+    </ul>
+  </div>
+</nav>
+<!-- Navigation Bar End -->
+<!-- Chat Box -->
+<div class="btn-group">
+  <button style="background-color: white;border: 1px solid black;color: white;padding: 10px 24px;cursor: pointer;float: left;">
+      <a href="#">
+          <span style="font-size:25px;color: #695E54;" class="glyphicon glyphicon-facetime-video"></span>
+      </a>
+  </button>
+  <button style="background-color: white;border: 1px solid black;color: white;padding: 10px 24px;cursor: pointer;float: left;">
+      <a href="#">
+          <span style="font-size:25px;color: #695E54;" class="glyphicon glyphicon-upload"></span>
+      </a>
+  </button>
+  <button style="background-color: white;border: 1px solid black;color: white;padding: 10px 24px;cursor: pointer;float: left;">
+      <a href="#">
+          <span style="font-size:25px;color: #695E54;" class="glyphicon glyphicon-picture"></span>
+      </a>
+  </button>
+</div>
+<center>
+<div>
+	<div class="container">
+		<img src="images/user_avatar.jpg" alt="Avatar">
+		<p style="text-align: left;">Hi,Johnny Appleseed here. How can I help you?</p>
+		<span class="time-right">11:00</span>
+	</div>
+			
+	<div class="container darker">
+		<img src="images/Bojack.jpg" alt="Avatar" class="right">
+		<p style="text-align: left;">Hello,this is Bojack here. I am having migraine lately. Is there a way to cure it?</p>
+		<span class="time-left">11:01</span>
+	</div>
+
+	<div class="container">
+		<img src="images/user_avatar.jpg" alt="Avatar">
+		<p style="text-align: left;">How long have you been experiencing?</p>
+		<span class="time-right">11:02</span>
+	</div>
+
+	<div class="container darker">
+		<img src="images/Bojack.jpg" alt="Avatar" class="right">
+		<p style="text-align: left;">About 2 months. I have been taking MC for a while now.</p>
+		<span class="time-left">11:05</span>
+	</div>
+</div>
+</center>
+
+<div class="panel-footer">
+    <div class="input-group">
+        <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+            <span class="input-group-btn">
+                <button class="btn btn-warning btn-sm" id="btn-chat">Send</button>
+            </span>
+    </div>
+</div>
+<!-- Chat Box End -->
+<!-- Footer -->
+<!-- <div class="outer">
+	<center>
+	<footer>
+	<div class="footerRow">
+		<div class="footerCell">
+			<div class="footer">
+				<ul class="what">
+					<br>
+					<strong><li style="font-size: 15px;">Contact Us:</li></strong>
+					<br>
+					<div class="lala">
+						<li>Working days: Flexible days </li>
+						<li>Time: Flexible Hours </li>
+						<li>Hotline: +65 6588 1011</li>
+						<li>Email: johanna_potatoes@nyp.edu.sg</li>
+					</div>
+				</ul>
+				<br>
+				<br> -->
+				<!-- <div id ="small">Copyright &copy; 2017 WEcare. All Rights Reserved</div> -->
+				<!-- <h6 id="puny">Copyright &copy; 2017 WEcare. All Rights Reserved</h6>
+			</div>
+		</div>
+	</div>
+	</footer>
+	</center>
+</div> -->
+<!-- Footer End -->
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+.footer{
+		position: absolute; 
+		right: 0;
+		bottom: 0;
+		left: 0;
+		border-radius: 4px;
+		background: rgb(217, 217, 217);
+		padding: 0px 20px 20px 20px;
+	}
+li {
+	display:block;
+}
+.what {
+	display:inline-block;
+}
+#logoFooter {
+	width:120px;
+	height:80px;
+}
+.lala{
+	font-size:13px;
+}
+.modal-footer{ 
+		background-color: rgb(217, 217, 217)
+}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<!-- Footer Css! -->
+<!-- <link href="css/footer_css.css" rel="stylesheet" type="text/css"> -->
+
+<!-- From Profile Page. Impt to have this. Makes the font look nicer-->
+<!-- <link rel="stylesheet" type="text/css" media="all" href="css/styles.css"> -->
+
+<title>WEcare</title>
+<style>
+/* Register CSS */
+.register{text-align:center}
+</style>
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav style="background-color: rgb(217, 217, 217);" class="navbar .navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button style="color: black;" type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span style="background-color: black !important;" class="icon-bar"></span>
+      <span style="background-color: black !important;" class="icon-bar"></span>
+      <span style="background-color: black !important;" class="icon-bar"></span>
+    </button>	
+		
+  </div>
+
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav">
+			<li><a style="padding: 0px" href="Homepage.html"><img style="height: 50px;width: 93px;" src="images\Website Logo.png"></a></li>
+      <li class="active"><a href="Profile Page - Compiled.html" style="color:black; font-family:Century Gothic; font-size:17px;">Profile</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"style="color:black; font-family:Century Gothic; font-size:17px;">Online Consultation <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="Doctor's Page - Compiled.html" style="color:black; font-family:Century Gothic; font-size:17px;">Doctors</a></li>
+        </ul>
+      </li>
+	  <li><a href="Fitness Class - Compiled.html" style="color:black; font-family:Century Gothic; font-size:17px;">Online Lessons</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:black; font-family:Century Gothic; font-size:17px;">Health Tips <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="#" style="color:black; font-family:Century Gothic; font-size:17px;">Tips on Dietary</a></li>
+		  <li><a href="#" style="color:black; font-family:Century Gothic; font-size:17px;">Tips on Fitness</a></li>
+        </ul>
+      </li>
+	    <li><a href="Query - Compiled.html" style="color:black; font-family:Century Gothic; font-size:17px;">Query</a></li>
+		<li><a href="feedback - Compiled.html" style="color:black; font-family:Century Gothic; font-size:17px;">Review </a></li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+			<div class="btn-group btn-group-lg">
+				<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-user"></span> Sign up</button>
+				<button type="button" class="btn btn-info"><span class="glyphicon glyphicon-log-in"> Login</button>
+				<button type="button" class="btn btn-success"><span class="glyphicon glyphicon-bell">
+				</button>
+			</div>
+    </ul>
+  </div>
+</nav>
+<!-- Navigation Bar End -->
+<!-- Register -->
+<form class="register">
+		<h1>Welcome to  WEcare register page, we are happy to be with you!</h1>
+		<br><br>
+		<input type="username" name="username" placeholder="Username" style="text-align:center; height:40px; width:250px" required>
+		<br><br>
+		<input type="name" name="name" placeholder="Name" style="text-align:center; height:40px; width:250px" required>
+		<br><br>
+		<input type="occupation" name="occupation" placeholder="Occupation" style="text-align:center; height:40px; width:250px" required>
+		<br><br>
+		<input type="address" name="address" placeholder="Address(Optional)" style="text-align:center; height:40px; width:250px">
+		<br><br>
+		<input type="email" name="email" placeholder="E-mail" style="text-align:center; height:40px; width:250px" title="Necesary so as to e able to send you notification" required>
+		<br><br>
+		<input type="number" name="phoneNumber" placeholder="Phone Number" style="text-align:center; height:40px; width:250px" required>
+		<br><br>
+		<form action="/action_page.php" class="register">
+		<input type="date" name="bday" style="height:26px; width:250px" required>
+		<br><br>
+		<label id="gender"><strong>Gender:</strong></label>
+				&nbsp;
+					<input type="radio" name="male" id="gender" value="Male"/><span>Male</span>
+				&nbsp;
+					<input type="radio" name="female" id="gender" value="Female"/><span>Female</span>
+		<br><br>
+		<button type=submit class="btn btn-warning" style="width:180px">Create my profile!</button>
+	</form>
+	<br>
+<!-- Register End -->
+<!-- Footer -->
+<!-- <div class="outer">
+	<center>
+	<footer>
+	<div class="footerRow">
+		<div class="footerCell">
+			<div class="footer">
+				<ul class="what">
+					<br>
+					<strong><li style="font-size: 15px;">Contact Us:</li></strong>
+					<br>
+					<div class="lala">
+						<li>Working days: Flexible days </li>
+						<li>Time: Flexible Hours </li>
+						<li>Hotline: +65 6588 1011</li>
+						<li>Email: johanna_potatoes@nyp.edu.sg</li>
+					</div>
+				</ul>
+				<br>
+				<br>
+	
+				<h6 id="puny">Copyright &copy; 2017 WEcare. All Rights Reserved</h6>
+			</div>
+		</div>
+	</div>
+	</footer>
+	</center>
+</div> -->
+<!-- Footer End -->
+
+</body>
+</html>

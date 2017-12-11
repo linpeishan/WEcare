@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- Footer Css! -->
+<!-- <link href="css/footer_css.css" rel="stylesheet" type="text/css"> -->
+
+<!-- From Profile Page. Impt to have this. Makes the font look nicer-->
+<!-- <link rel="stylesheet" type="text/css" media="all" href="css/styles.css"> -->
+
+<!-- Feedback CSS -->
+<link href ="feedback_css.css" rel="stylesheet">
+
+<title>WEcare</title>
+<style>
+/* Feedback CSS */
+
+.glyphicon-lg{font-size:3em}
+.blockquote-box{border-right:5px solid #E6E6E6;margin-bottom:25px}
+.blockquote-box .square{width:100px;min-height:50px;margin-right:22px;text-align:center!important;background-color:#E6E6E6;padding:20px 0}
+.blockquote-box.blockquote-primary{border-color:#357EBD}
+.blockquote-box.blockquote-primary .square{background-color:#428BCA;color:#FFF}
+.blockquote-box.blockquote-success{border-color:#4CAE4C}
+.blockquote-box.blockquote-success .square{background-color:#5CB85C;color:#FFF}
+.blockquote-box.blockquote-info{border-color:#46B8DA}
+.blockquote-box.blockquote-info .square{background-color:#5BC0DE;color:#FFF}
+.blockquote-box.blockquote-warning{border-color:#EEA236}
+.blockquote-box.blockquote-warning .square{background-color:#F0AD4E;color:#FFF}
+.blockquote-box.blockquote-danger{border-color:#D43F3A}
+.blockquote-box.blockquote-danger .square{background-color:#D9534F;color:#FFF}
+
+/*
+ * Stars
+ */
+.rating-gly {
+    font-family: 'Glyphicons Halflings';
+}
+.rating-gly-star {
+    font-family: 'Glyphicons Halflings';
+    padding-left: 2px;
+}
+
+.rating-gly-star .rating-stars:before {
+    padding-left: 2px;
+}
+
+.rating-lg .rating-gly-star, .rating-lg .rating-gly-star .rating-stars:before {
+    padding-left: 4px;
+}
+
+.rating-xl .rating-gly-star, .rating-xl .rating-gly-star .rating-stars:before {
+    padding-left: 2px;
+}
+
+.rating-active {
+    cursor: default;
+}
+
+.rating-disabled {
+    cursor: not-allowed;
+}
+
+.rating-uni {
+    font-size: 1.2em;
+    margin-top: -5px;
+}
+
+.rating-container {
+    position: relative;
+    vertical-align: middle;
+    display: inline-block;
+    color: #e3e3e3;
+    overflow: hidden;
+}
+
+.rating-container:before {
+    content: attr(data-content);
+}
+
+.rating-container .rating-stars {
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #fde16d;
+    transition: all 0.25s ease-out;
+    -o-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    -webkit-transition: all 0.25s ease-out;
+}
+
+.rating-container .rating-stars:before {
+    content: attr(data-content);
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.7);
+}
+
+.rating-container-rtl {
+    position: relative;
+    vertical-align: middle;
+    display: inline-block;
+    overflow: hidden;
+    color: #fde16d;
+}
+
+.rating-container-rtl:before {
+    content: attr(data-content);
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.7);
+}
+
+.rating-container-rtl .rating-stars {
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #e3e3e3;
+    transition: all 0.25s ease-out;
+    -o-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    -webkit-transition: all 0.25s ease-out;
+}
+
+.rating-container-rtl .rating-stars:before {
+    content: attr(data-content);
+}
+
+/**
+ * Rating sizes
+ */
+.rating-xl {
+    font-size: 4.89em;
+}
+
+.rating-lg {
+    font-size: 3.91em;
+}
+
+.rating-md {
+    font-size: 3.13em;
+}
+
+.rating-sm {
+    font-size: 2.5em;
+}
+
+.rating-xs {
+    font-size: 2em;
+}
+
+/**
+ * Clear rating button
+ */
+.star-rating .clear-rating, .star-rating-rtl .clear-rating {
+    color: #aaa;
+    cursor: not-allowed;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 60%;
+}
+
+.clear-rating-active {
+    cursor: pointer !important;
+}
+
+.clear-rating-active:hover {
+    color: #843534;
+}
+
+.star-rating .clear-rating {
+    padding-right: 5px;
+}
+
+/**
+ * Caption
+ */
+.star-rating .caption, .star-rating-rtl .caption {
+    color: #999;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 55%;
+}
+/* Feedback CSS End */
+</style>
+</head>
+<body style="background-color: rgb(240, 240, 240);">
+<!-- Navigation Bar -->
+<nav style="background-color: rgb(217, 217, 217);" class="navbar .navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button style="color: black;" type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span style="background-color: black !important;" class="icon-bar"></span>
+      <span style="background-color: black !important;" class="icon-bar"></span>
+      <span style="background-color: black !important;" class="icon-bar"></span>
+    </button>	
+    
+  </div>
+
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav">
+			<li><a style="padding: 0px" href="Homepage.html"><img style="height: 50px;width: 93px;" src="images\Website Logo.png"></a></li>
+      <li class="active"><a href="Profile Page - Compiled.html" style="color:black; font-family:Century Gothic; font-size:17px;">Profile</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"style="color:black; font-family:Century Gothic; font-size:17px;">Online Consultation <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="Doctor's Page - Compiled.html" style="color:black; font-family:Century Gothic; font-size:17px;">Doctors</a></li>
+        </ul>
+      </li>
+	  <li><a href="Fitness Class - Compiled.html" style="color:black; font-family:Century Gothic; font-size:17px;">Online Lessons</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:black; font-family:Century Gothic; font-size:17px;">Health Tips <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><a href="Health Tips - Dietary.html" style="color:black; font-family:Century Gothic; font-size:17px;">Tips on Dietary</a></li>
+		  <li><a href="Health Tips - Fitness.html" style="color:black; font-family:Century Gothic; font-size:17px;">Tips on Fitness</a></li>
+        </ul>
+      </li>
+	    <li><a href="Query - Compiled.html" style="color:black; font-family:Century Gothic; font-size:17px;">Query</a></li>
+		<li><a href="#" style="color:black; font-family:Century Gothic; font-size:17px;">Review </a></li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+			<div class="btn-group btn-group-lg">
+				<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-user"></span> Sign up</button>
+				<button type="button" class="btn btn-info"><span class="glyphicon glyphicon-log-in"> Login</button>	
+				<button type="button" class="btn btn-success"><span class="glyphicon glyphicon-bell">
+				</button>
+			</div>
+    </ul>
+  </div>
+</nav>
+<!-- Navigation Bar End -->
+<!-- Feedback Page -->
+<div class="container">
+    <div class="row">
+		<h2 style="text-align: center;">Feedback</h2>
+    <table width="100%" border="0">
+      <div class="col-md-9 col-md-offset-0">
+        <tr><td width="77%">
+        <div class="">
+          <form class="form-horizontal" action="send.php" method="post">
+          <fieldset>
+    
+            <!-- Name input-->
+            <div class="form-group">
+              <label style="font-size: 17px;" class="col-md-3 control-label" for="name">Username</label>
+              <div class="col-md-9">
+                <h5> @BoforGoJack</h5>
+              </div>
+            </div>
+    
+            <!-- Email input-->
+            <div class="form-group">
+              <label style="font-size: 17px;" class="col-md-3 control-label" for="email">E-mail</label>
+              <div class="col-md-9">
+                <h5>BoforGoJack@gmail.com</h5>
+              </div>
+            </div>
+    
+            <!-- Message body -->
+            <div class="form-group">
+              <label style="font-size: 17px;" class="col-md-3 control-label" for="message">Feedback</label>
+              <div class="col-md-9">
+                <textarea class="form-control" id="message" name="message" placeholder="Please enter your feedback here..." rows="5"></textarea>
+              </div>
+            </div>
+
+
+            <!-- Rating -->
+            <div class="form-group">
+              <label style="font-size: 17px;" class="col-md-3 control-label" for="message">Rating</label>
+              <div class="col-md-9">
+                <!-- <input id="input-21e" value="0" type="number" class="rating" min=0 max=5 step=0.5 data-size="xs" > -->
+				<img src="images/stars.png" class="img-rounded">
+              </div>
+            </div>
+    </td>
+    <td align="center" valign="top" width="23%">
+            <!-- Form actions -->
+            <div class="form-group">
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+                <button type="submit" class="btn btn-primary btn-md">Submit</button>
+                <button type="reset" class="btn btn-default btn-md">Clear</button>
+								
+            </div>
+          </fieldset>
+          </form>
+        </div>
+    </div>
+    </td>
+    </tr>
+    </table>
+</div>
+
+    <div class="container">
+    			
+		<div class="row">
+			<div class="col-sm-3">
+				<div class="rating-block">
+					<h4>Average user rating</h4>
+					<h2 class="bold padding-bottom-7">4.3 <small>/ 5</small></h2>
+					<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+					  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+					</button>
+					<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+					  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+					</button>
+					<button type="button" class="btn btn-warning btn-sm" aria-label="Left Align">
+					  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+					</button>
+					<button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+					  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+					</button>
+					<button type="button" class="btn btn-default btn-grey btn-sm" aria-label="Left Align">
+					  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+					</button>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<h4>Rating breakdown</h4>
+				<div class="pull-left">
+					<div class="pull-left" style="width:35px; line-height:1;">
+						<div style="font-size: 10px; height:9px; margin:5px 0;">5 <span class="glyphicon glyphicon-star"></span></div>
+					</div>
+					<div class="pull-left" style="width:180px;">
+						<div class="progress" style="height:9px; margin:8px 0;">
+						  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5" style="width: 1000%">
+							<span class="sr-only">80% Complete (danger)</span>
+						  </div>
+						</div>
+					</div>
+					<div class="pull-right" style="font-size: 10px; margin-left: 20px;">1</div>
+				</div>
+				<div class="pull-left">
+					<div class="pull-left" style="width:35px; line-height:1;">
+						<div style="font-size: 10px; height:9px; margin:5px 0;">4 <span class="glyphicon glyphicon-star"></span></div>
+					</div>
+					<div class="pull-left" style="width:180px;">
+						<div class="progress" style="height:9px; margin:8px 0;">
+						  <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="4" aria-valuemin="0" aria-valuemax="5" style="width: 80%">
+							<span class="sr-only">80% Complete (danger)</span>
+						  </div>
+						</div>
+					</div>
+					<div class="pull-right" style="font-size: 10px; margin-left: 20px;">1</div>
+				</div>
+				<div class="pull-left">
+					<div class="pull-left" style="width:35px; line-height:1;">
+						<div style="font-size: 10px; height:9px; margin:5px 0;">3 <span class="glyphicon glyphicon-star"></span></div>
+					</div>
+					<div class="pull-left" style="width:180px;">
+						<div class="progress" style="height:9px; margin:8px 0;">
+						  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="3" aria-valuemin="0" aria-valuemax="5" style="width: 60%">
+							<span class="sr-only">80% Complete (danger)</span>
+						  </div>
+						</div>
+					</div>
+					<div class="pull-right" style="font-size: 10px; margin-left: 20px;">0</div>
+				</div>
+				<div class="pull-left">
+					<div class="pull-left" style="width:35px; line-height:1;">
+						<div style="font-size: 10px; height:9px; margin:5px 0;">2 <span class="glyphicon glyphicon-star"></span></div>
+					</div>
+					<div class="pull-left" style="width:180px;">
+						<div class="progress" style="height:9px; margin:8px 0;">
+						  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="5" style="width: 40%">
+							<span class="sr-only">80% Complete (danger)</span>
+						  </div>
+						</div>
+					</div>
+					<div class="pull-right" style="font-size: 10px; margin-left: 20px;">0</div>
+				</div>
+				<div class="pull-left">
+					<div class="pull-left" style="width:35px; line-height:1;">
+						<div style="font-size: 10px; height:9px; margin:5px 0;">1 <span class="glyphicon glyphicon-star"></span></div>
+					</div>
+					<div class="pull-left" style="width:180px;">
+						<div class="progress" style="height:9px; margin:8px 0;">
+						  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="5" style="width: 20%">
+							<span class="sr-only">80% Complete (danger)</span>
+						  </div>
+						</div>
+					</div>
+					<div class="pull-right" style="font-size: 10px; margin-left: 20px;">0</div>
+				</div>
+			</div>			
+		</div>
+				
+		<div class="row">
+			<div class="col-sm-7">
+				<hr style="height: 1px;border: none;color:#333;background-color:#333;">
+				<div class="review-block">
+					<div class="row">
+						<div style="font-size: 13px;" class="col-sm-3">
+							<img style="border-radius: 50%;border: 1px solid black" src="images/user_avatar.jpg">
+							<div class="review-block-name"><a href="#">Johanna</a></div>
+							<div class="review-block-date">January 29, 2016<br/>1 day ago</div>
+						</div>
+						<div class="col-sm-9">
+							<div class="review-block-rate">
+								<button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+								  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+								</button>
+								<button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+								  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+								</button>
+								<button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+								  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+								</button>
+								<button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+								  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+								</button>
+								<button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+								  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+								</button>
+							</div>
+							<br>
+							<div style="font-size: 14px;" class="review-block-title">I like it</div>
+							<div style="font-size: 14px;" class="review-block-description">this was nice in buy. this was nice in buy. this was nice in buy. this was nice in buy this was nice in buy this was nice in buy this was nice in buy this was nice in buy</div>
+						</div>
+					</div>
+					<hr style="height: 1px;border: none;color:#333;background-color:#333;">
+					<div class="row">
+						<div style="font-size: 13px;" class="col-sm-3">
+							<img style="border-radius: 50%; border: 1px solid black" src="images/penguin.jpg" class="img-rounded">
+							<div class="review-block-name"><a href="#">Charmaine</a></div>
+							<div class="review-block-date">January 29, 2016<br/>1 day ago</div>
+						</div>
+						<div class="col-sm-9">
+							<div class="review-block-rate">
+								<button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+								  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+								</button>
+								<button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+								  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+								</button>
+								<button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+								  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+								</button>
+								<button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+								  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+								</button>
+								<button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+								  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+								</button>
+							</div>
+							<br>
+							<div style="font-size: 14px;" class="review-block-title">this was nice in buy</div>
+							<div style="font-size: 14px;" class="review-block-description">this was nice in buy. this was nice in buy. this was nice in buy. this was nice in buy this was nice in buy this was nice in buy this was nice in buy this was nice in buy</div>
+						</div>
+					</div>
+					<hr style="height: 1px;border: none;color:#333;background-color:#333;">
+					<div class="row">
+						<div style="font-size: 13px;" class="col-sm-3">
+							<img style="border-radius: 50%; border: 1px solid black" src="images/giraffe.png" class="img-rounded">
+							<div class="review-block-name"><a href="#">Sivakumar Kamali</a></div>
+							<div class="review-block-date">January 29, 2016<br/>1 day ago</div>
+						</div>
+						<div class="col-sm-9">
+							<div class="review-block-rate">
+								<button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+								  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+								</button>
+								<button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+								  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+								</button>
+								<button type="button" class="btn btn-warning btn-xs" aria-label="Left Align">
+								  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+								</button>
+								<button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+								  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+								</button>
+								<button type="button" class="btn btn-default btn-grey btn-xs" aria-label="Left Align">
+								  <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+								</button>
+							</div>
+							<br>
+							<div style="font-size: 14px;" class="review-block-title">this was nice in buy</div>
+							<div style="font-size: 14px;" class="review-block-description">this was nice in buy. this was nice in buy. this was nice in buy. this was nice in buy this was nice in buy this was nice in buy this was nice in buy this was nice in buy</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		</div> <!-- /container -->
+<!-- Feedback Page End -->
+<!-- Footer -->
+
+<!-- <div class="outer">
+	<center>
+	<footer>
+	<div class="footerRow">
+		<div class="footerCell">
+			<div class="footer">
+				<ul class="what">
+					<br>
+					<strong><li style="font-size: 15px;">Contact Us:</li></strong>
+					<br>
+					<div class="lala">
+						<li>Working days: Flexible days </li>
+						<li>Time: Flexible Hours </li>
+						<li>Hotline: +65 6588 1011</li>
+						<li>Email: johanna_potatoes@nyp.edu.sg</li>
+					</div>
+				</ul>
+				<br>
+				<br> -->
+				<!-- <div id ="small">Copyright &copy; 2017 WEcare. All Rights Reserved</div> -->
+				<!-- <h6 id="puny">Copyright &copy; 2017 WEcare. All Rights Reserved</h6>
+			</div>
+		</div>
+	</div>
+	</footer>
+	</center>
+</div> -->
+<!-- Footer End -->
+
+</body>
+</html>
