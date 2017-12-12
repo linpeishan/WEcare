@@ -1,23 +1,12 @@
-# Booking Page
-
-#TYPE: DOCTOR/ INSTRUCTOR
-#SPECIALIZATION
-#======================
-#Name
-#Age
-#phoneNumber
-#Email
-#Date and Time
-
-import datetime
-
-class bookingPage():
-    def __init__(self,name,age,phoneNumber,email,dateAndTime):
+class Booking_Page():
+    def __init__(self,name,age,phoneNumber,email,startingDateAndTime,type):
+        self.__typeid = ""
         self.__name = name
         self.__age = age
         self.__phoneNumber = phoneNumber
         self.__email = email
-        self.__dateAndTime = dateAndTime
+        self.__startingDateAndTime = startingDateAndTime
+        self.__type = type
 
     def get_name(self):
         return self.__name
@@ -27,8 +16,11 @@ class bookingPage():
         return self.__phoneNumber
     def get_email(self):
         return self.__email
-    def get_dateAndTime(self):
-        return self.__dateAndTime
+    def get_startingDateAndTime(self):
+        return self.__startingDateAndTime
+    def get_type(self):
+        return self.__type
+
 
     def set_name(self,name):
         self.__name = name
@@ -38,5 +30,13 @@ class bookingPage():
         self.__phoneNumber = phoneNumber
     def set_email(self,email):
         self.__email = email
-    def set_dateAndTime(self,dateAndTime):
-        self.__dateAndTime = dateAndTime
+    def set_startingDateAndTime(self,startingDateAndTime):
+        self.__startingDateAndTime = startingDateAndTime
+    def set_type(self,type):
+        self.__type = type
+
+    def get_typeid(self):
+        return self.__typeid
+
+    def set_typeid(self,typeid):
+        self.__typeid = typeid

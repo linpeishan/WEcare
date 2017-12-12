@@ -1,42 +1,44 @@
 <!--- AKA VIEW_ALL_PUBLICATIONS -->
 {% extends "layout.html" %}
 {% block body %}
-
-    <h1>Appointment Notifications</h1>
+    <center>
+    <h1>Appointment Notifications <span class="glyphicon glyphicon-bell"></span></h1>
     <hr>
     <br>
-    <table class="table table-bordered">
+    <table class="table table-user-information" style="width:950px">
         <thead>
         <tr>
-            <th>#</th>
+            <th>Type</th>
             <th>Specialization: </th>
-            <th>Date: </th>
-            <th>Time: </th>
+            <th>Name: </th>
+            <th>Age: </th>
+            <th>Contact: </th>
+            <th>Date & Time: </th>
             <th></th>
         </tr>
         </thead>
         <thead>
-        <tr>
-            <th scope="row">1</th>
-            <td>Hygience</td>
-            <td>24/05/2017</td>
-            <td>23:59</td>
-            <!---KIV-->
-            <td>Change appointment Date/Time</td>
-        </tr>
-        </thead>
-        <thead>
-        <tr>
-            <th scope="row">2</th>
-            <td>Face Reconstruction</td>
-            <td>24/05/2017</td>
-            <td>23:59</td>
-            <!---KIV-->
-            <td><a href="update">Change appointment Date/Time</a> </td>
-        </tr>
-        </thead>
+        <tbody>
+        {% for booking in bookings %}
+            <tr>
+                {% if booking.get_type() == 'idoctor'%}
+                    <td>Doctor Appointment</td>
+                    <td>{{ booking.get_specialization1() }}</td>
+                {% else %}
+                    <td>Instructor Appointment</td>
+                    <td>{{ booking.get_specialization2() }}</td>
+                {% endif %}
+                <td> {{ booking.get_name() }}</td>
+                <td> {{ booking.get_age() }}</td>
+                <td> {{ booking.get_phoneNumber() }}</td>
+                <td> {{ booking.get_startingDateAndTime() }}</td>
+
+                <td><a href="/update/{{booking.get_typeid()}}" class="btn btn-warning"> Change Appointment Date/Time</a></td>
+            </tr>
+        {% endfor %}
+            </thead>
+        </tbody>
     </table>
-
-
+    </center>
 
 {% endblock %}

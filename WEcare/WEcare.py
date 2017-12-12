@@ -1,41 +1,63 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
-from wtforms import Form, StringField, TextField, SelectField, IntegerField, DateTimeField, validators, RadioField
+from wtforms import Form, StringField, TextField, SelectField, IntegerField, DateTimeField, RadioField, validators
 from wtforms.fields.html5 import EmailField
-import doctor as doctor
-import instructor as instructor
-#firebase stuffs
+from Doctor import Doctor
+from Instructor import Instructor
+
+#firebase for booking page
+#----start----
 import firebase_admin
 from firebase_admin import credentials, db
 cred = credentials.Certificate('cred/booking-b814e-firebase-adminsdk-j8prf-51aedf5eb9.json')
 default_app = firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://booking-b814e.firebaseio.com/'
 })
-
 root = db.reference()
-
-
-
+#----end-----
 
 app = Flask(__name__)
 
-
+#-----------------------------------------------------------------------------------------------------------------------------------
 @app.route('/home')
 def home():
     return render_template('home.html')
-
 @app.route('/videoChat')
 def videoChat():
     return render_template('VideoChat.html')
+#-----------------------------------------------------------------------------------------------------------------------------------
 
-#View Booking Page  AKA VIEW_ALL_PUBLICATIONS
-@app.route('/viewBookings')
-def viewBookings():
-    return render_template('view_Booking_Page.html')
 
-#start
+#View Booking Page  AKA VIEW_ALL_PUBLICATIONS.html
+@app.route('/view_Booking_Page')
+def view_Booking_Page():
+    bookings = root.child('bookings').get()
+    list = [] #store booking objects
+    for typeid in bookings:
+
+        eachbooking = bookings[typeid]
+
+        if eachbooking['type'] == 'idoctor':
+            doctor = Doctor(eachbooking['name'],eachbooking['age'],
+                            eachbooking['phoneNumber'],eachbooking['email'],
+                            eachbooking['startingDateAndTime'],eachbooking['type'],
+                            eachbooking['specialization1'])
+            doctor.set_typeid(typeid)
+            print(doctor.get_typeid())
+            list.append(doctor)
+        else:
+            instructor = Instructor(eachbooking['name'],eachbooking['age'],
+                            eachbooking['phoneNumber'],eachbooking['email'],
+                            eachbooking['startingDateAndTime'],eachbooking['type'],
+                            eachbooking['specialization2'])
+            instructor.set_typeid(typeid)
+            print(instructor.get_typeid())
+            list.append(instructor)
+
+    return render_template('view_Booking_Page.html',bookings = list)
+
+
 #Indicate what's needed for that form; for my radio field
 class RequiredIf(object):
-
     def __init__(self, *args, **kwargs):
         self.conditions = kwargs
 
@@ -53,90 +75,172 @@ class RequiredIf(object):
 
 class bookingPage(Form):#aka class PublicationForm(Form)
     type = RadioField('Choose type  ',[validators.DataRequired()],choices=[('idoctor','Doctor'),('iinstructor','Instructor')],default="idoctor")
-    name = StringField("Name (Mr/Ms/Madam) ",[validators.Length(min=1,max=150),validators.DataRequired()])
-    age = IntegerField("Age ",[validators.DataRequired(),validators.Length(200)])
-    phoneNumber = TextField("Number ",[validators.DataRequired()]) #kiv,will validate to sg number format
-    email = EmailField("Email ", [validators.DataRequired(), validators.Email()])
+    name = StringField("Name (Mr/Ms/Madam) ",[validators.Length(min=1,max=150),validators.DataRequired()],default="Bojack Horseman")
+    age = IntegerField("Age ",[validators.DataRequired()],default=54)
+    phoneNumber = TextField("Number ",[validators.DataRequired()],default="08082716773") #kiv,will validate to sg number format
+    email = EmailField("Email ", [validators.DataRequired(), validators.Email()],default="BoforGoJack@gmail.com")
     specialization1 = SelectField("Specialization(Doctors) ",[RequiredIf(type="idoctor")],choices=[("","Please Select:"),
-                                                                                       ("ddermatology","Dermatology"),
-                                                                                       ("dgeneralmedicine", "General Medicine"),
-                                                                                       ("dinternalmedicine", "Internal Medicine"),
-                                                                                       ("dneurologist", "Neurologist"),],
+                                                                                       ("Dermatology","Dermatology"),
+                                                                                       ("General Medicine", "General Medicine"),
+                                                                                       ("Internal Medicine", "Internal Medicine"),
+                                                                                       ("Neurologist", "Neurologist"),],
                                                                                         default="")
     specialization2 =SelectField("Specialization(Instructors) ",[RequiredIf(type="iinstructor")],choices=[("","Please Select:"),
-                                                                                           ("iyoga", "Yoga Instructor"),
-                                                                                           ("izumba", "Zumba Instructor"),
-                                                                                           ("ihiphop", "Hip Hop Instructor"),
-                                                                                           ("ipiloxing", "Masala Bhangra Instructor")],
+                                                                                           ("Yoga", "Yoga Instructor"),
+                                                                                           ("Zumba", "Zumba Instructor"),
+                                                                                           ("Hiphop", "Hip Hop Instructor"),
+                                                                                           ("Piloxing", "Masala Bhangra Instructor")],
                                                                                             default="")
-    startingDateAndTime = DateTimeField("Starting Date & Time ",[validators.DataRequired()], format='%Y-%m-%d %H:%M:%S')
-
+    # startingDateAndTime = DateTimeField("Starting Date & Time ",[validators.DataRequired()], format='%Y-%m-%d %H:%M:%S')
+    startingDateAndTime = TextField("Starting Date & Time ", [validators.DataRequired()])
 #Book Booking Page aka create_publications
 @app.route('/bookingPage',methods=["GET","POST"]) #@app.route('/newpublication')
 def bookingpage():
     form = bookingPage(request.form)
-    if request.method == "POST" and form.validate():
+    if request.method == 'POST' and form.validate():
         if form.type.data == "idoctor":
             name = form.name.data
             age = form.age.data
             phoneNumber = form.phoneNumber.data
             email = form.email.data
-            specialization = form.specialization1.data
-            dateAndTime = form.dateAndTime.data
+            specialization1 = form.specialization1.data
+            startingDateAndTime = form.startingDateAndTime.data
+            type = form.type.data
 
-            doc = doctor.Doctor(name,age,phoneNumber,email,dateAndTime,specialization)
+            doctor = Doctor(name,age,phoneNumber,email,startingDateAndTime,type,specialization1)
 
-            doc_db = root.child('Doctor')
+            doc_db = root.child('bookings')
+
             doc_db.push({
-                'Name': doc.get_name(),
-                'Age' : doc.get_age(),
-                'Phone Number' : doc.get_phoneNumber(),
-                'Email' : doc.get_email(),
-                'Date And Time' : doc.get_dateAndTime(),
-                'Specialization' : doc.get_specialization()
+                'name': doctor.get_name(),
+                'age': doctor.get_age(),
+                'phoneNumber': doctor.get_phoneNumber(),
+                'email': doctor.get_email(),
+                'startingDateAndTime': doctor.get_startingDateAndTime(),
+                'type': doctor.get_type(),
+                'specialization1': doctor.get_specialization1(),
             })
 
-            flash('Doctor Appointment Booked.','success')
+            flash("Your appointment is registered.", 'success')
 
         elif form.type.data == "iinstructor":
             name = form.name.data
             age = form.age.data
             phoneNumber = form.phoneNumber.data
             email = form.email.data
-            specialization = form.specialization2.data
-            dateAndTime = form.dateAndTime.data
+            specialization2 = form.specialization2.data
+            startingDateAndTime = form.startingDateAndTime.data
+            type = form.type.data
 
-            ins = instructor.Instructor(name,age,phoneNumber,email,dateAndTime,specialization)
+            instructor = Instructor(name,age,phoneNumber,email,startingDateAndTime,type,specialization2)
 
-            ins_db = root.child('Instructor')
+            ins_db = root.child('bookings')
             ins_db.push({
-                'Name' : ins.get_name(),
-                'Age' : ins.get_age(),
-                'Phone Number' : ins.get_phoneNumber(),
-                'Email' : ins.get_email(),
-                'Date And Time' : ins.get_dateAndTime(),
-                'Specialization' : ins.get_specialization()
+                'name' : instructor.get_name(),
+                'age' : instructor.get_age(),
+                'phoneNumber' : instructor.get_phoneNumber(),
+                'email' : instructor.get_email(),
+                'startingDateAndTime' : instructor.get_startingDateAndTime(),
+                'type' : instructor.get_type(),
+                'specialization2' : instructor.get_specialization2()
             })
 
-            flash('Instructor Appointment Booked.','success')
+            flash('Your appointment is registered.', 'success')
 
-        return redirect(url_for('view_Booking_Page.html'))
-        # return render_template('Booking_Page.html',form=form)
+        return redirect(url_for('view_Booking_Page'))
+        # return render_template('view_Booking_Page.html',form=form)
     return render_template('Booking_Page.html', form=form)
 
 
 #update/ change date and time aka update_publications
-@app.route('/update')
-def update_bookings():
+@app.route('/update/<string:id>/',methods=['GET','POST'])
+def update_bookings(id):
     form = bookingPage(request.form)
-    form.username.data = "BojackHorseMan"
-    form.name.data = "BoJack HorseMan"
-    form.age.data = 54
-    form.phoneNumber.data = "6116162"
-    form.email.data = "bojack@gmail.com"
-    form.specialization.data = "Dermatology"
-    return render_template('update_Booking_Page.html',form=form)
+    if request.method == 'POST' and form.validate():
+        if form.type.data == "idoctor":
+            name = form.name.data
+            age = form.age.data
+            phoneNumber = form.phoneNumber.data
+            email = form.email.data
+            specialization1 = form.specialization1.data
+            startingDateAndTime = form.startingDateAndTime.data
+            type = form.type.data
 
+            doctor = Doctor(name,age,phoneNumber,email,startingDateAndTime,type,specialization1)
+
+            doc_db = root.child('bookings/'+id)
+
+            doc_db.set({
+                'name': doctor.get_name(),
+                'age': doctor.get_age(),
+                'phoneNumber': doctor.get_phoneNumber(),
+                'email': doctor.get_email(),
+                'startingDateAndTime': doctor.get_startingDateAndTime(),
+                'type': doctor.get_type(),
+                'specialization1': doctor.get_specialization1(),
+            })
+
+            flash("Your appointment is registered.", 'success')
+
+        elif form.type.data == "iinstructor":
+            name = form.name.data
+            age = form.age.data
+            phoneNumber = form.phoneNumber.data
+            email = form.email.data
+            specialization2 = form.specialization2.data
+            startingDateAndTime = form.startingDateAndTime.data
+            type = form.type.data
+
+            instructor = Instructor(name,age,phoneNumber,email,startingDateAndTime,type,specialization2)
+
+            ins_db = root.child('bookings/'+id)
+
+            ins_db.set({
+                'name' : instructor.get_name(),
+                'age' : instructor.get_age(),
+                'phoneNumber' : instructor.get_phoneNumber(),
+                'email' : instructor.get_email(),
+                'startingDateAndTime' : instructor.get_startingDateAndTime(),
+                'type' : instructor.get_type(),
+                'specialization2' : instructor.get_specialization2(),
+            })
+
+            flash('Your appointment is registered.', 'success')
+
+        return redirect(url_for('view_Booking_Page'))
+    else:
+        url = 'bookings/' + id
+        eachbook = root.child(url).get()
+
+        if eachbook['type'] == 'idoctor':
+            doctor = Doctor(eachbook['name'],eachbook['age'],
+                            eachbook['phoneNumber'],eachbook['email'],
+                            eachbook['startingDateAndTime'],eachbook['type'],
+                            eachbook['specialization1'])
+            doctor.set_typeid(id)
+            form.name.data = doctor.get_name()
+            form.age.data = doctor.get_age()
+            form.phoneNumber.data = doctor.get_phoneNumber()
+            form.email.data = doctor.get_email()
+            form.specialization1.data = doctor.get_specialization1()
+            form.startingDateAndTime.data = doctor.get_startingDateAndTime()
+            form.type.data = doctor.get_type()
+
+        else:
+            instructor = Instructor(eachbook['name'], eachbook['age'],
+                                    eachbook['phoneNumber'], eachbook['email'],
+                                    eachbook['startingDateAndTime'], eachbook['type'],
+                                    eachbook['specialization2'])
+            instructor.set_typeid(id)
+            form.name.data = instructor.get_name()
+            form.age.data = instructor.get_age()
+            form.phoneNumber.data = instructor.get_phoneNumber()
+            form.email.data = instructor.get_email()
+            form.specialization2.data = instructor.get_specialization2()
+            form.startingDateAndTime.data = instructor.get_startingDateAndTime()
+            form.type.data = instructor.get_type()
+        return render_template('update_Booking_Page.html',form=form)
+    # return redirect(url_for("view_Booking_Page"))
 
 if __name__ == '__main__':
     app.secret_key = "helloworld"
