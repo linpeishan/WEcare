@@ -109,9 +109,9 @@ def bookingpage():
 
             doctor = Doctor(name,age,phoneNumber,email,startingDateAndTime,type,specialization1)
 
-            doc_db = root.child('bookings')
+            book_db = root.child('bookings')
 
-            doc_db.push({
+            book_db.push({
                 'name': doctor.get_name(),
                 'age': doctor.get_age(),
                 'phoneNumber': doctor.get_phoneNumber(),
@@ -134,8 +134,8 @@ def bookingpage():
 
             instructor = Instructor(name,age,phoneNumber,email,startingDateAndTime,type,specialization2)
 
-            ins_db = root.child('bookings')
-            ins_db.push({
+            book_db = root.child('bookings')
+            book_db.push({
                 'name' : instructor.get_name(),
                 'age' : instructor.get_age(),
                 'phoneNumber' : instructor.get_phoneNumber(),
@@ -168,9 +168,9 @@ def update_bookings(id):
 
             doctor = Doctor(name,age,phoneNumber,email,startingDateAndTime,type,specialization1)
 
-            doc_db = root.child('bookings/'+id)
+            book_db = root.child('bookings/'+id)
 
-            doc_db.set({
+            book_db.set({
                 'name': doctor.get_name(),
                 'age': doctor.get_age(),
                 'phoneNumber': doctor.get_phoneNumber(),
@@ -193,9 +193,9 @@ def update_bookings(id):
 
             instructor = Instructor(name,age,phoneNumber,email,startingDateAndTime,type,specialization2)
 
-            ins_db = root.child('bookings/'+id)
+            book_db = root.child('bookings/'+id)
 
-            ins_db.set({
+            book_db.set({
                 'name' : instructor.get_name(),
                 'age' : instructor.get_age(),
                 'phoneNumber' : instructor.get_phoneNumber(),
@@ -241,6 +241,14 @@ def update_bookings(id):
             form.type.data = instructor.get_type()
         return render_template('update_Booking_Page.html',form=form)
     # return redirect(url_for("view_Booking_Page"))
+#cancel appointment
+@app.route('/delete_bookings/<string:id>',methods = ['POST'])
+def delete_booking(id):
+    book_db = root.child('bookings/'+id)
+    book_db.delete()
+    flash('Appoinment Cancelled','success')
+
+    return redirect(url_for('view_Booking_Page'))
 
 if __name__ == '__main__':
     app.secret_key = "helloworld"

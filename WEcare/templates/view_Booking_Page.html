@@ -34,6 +34,9 @@
                 <td> {{ booking.get_startingDateAndTime() }}</td>
 
                 <td><a href="/update/{{booking.get_typeid()}}" class="btn btn-warning"> Change Appointment Date/Time</a></td>
+                <td><form action="{{ url_for('delete_booking',id=booking.get_typeid())}}" method="post">
+                    <input type= "submit" value = "Cancel Appointment" class="btn btn-danger" onclick="return confirm('Are you sure?');"></form></td>
+                <td></td>
             </tr>
         {% endfor %}
             </thead>
