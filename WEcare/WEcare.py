@@ -4,6 +4,7 @@ from wtforms.fields.html5 import EmailField
 from Doctor import Doctor
 from Instructor import Instructor
 
+
 #firebase for booking page
 #----start----
 import firebase_admin
@@ -93,6 +94,34 @@ class bookingPage(Form):#aka class PublicationForm(Form)
                                                                                             default="")
     # startingDateAndTime = DateTimeField("Starting Date & Time ",[validators.DataRequired()], format='%Y-%m-%d %H:%M:%S')
     startingDateAndTime = TextField("Starting Date & Time ", [validators.DataRequired()])
+#credit card page
+    cardType = RadioField('Payment Details  ',[validators.DataRequired()],choices=[('ivisa','Visa'),('imastercard','Master Card'),('iamericanexpress','American Express')],default="ivisa")
+    cardName = StringField("Card Name ",[validators.Length(min=1,max=150),validators.DataRequired()])
+    cardNumber = IntegerField("Card Number ",[validators.DataRequired()])
+    expirationMonth = SelectField("Expiration Date ",[validators.DataRequired()],choices=[("","Please Select:"),
+                                                                                       ("January","January"),
+                                                                                       ("February", "Febuary"),
+                                                                                       ("March", "March"),
+                                                                                       ("April", "April"),
+                                                                                       ("May","May"),
+                                                                                       ("June","June"),
+                                                                                       ("July","July"),
+                                                                                       ("August","August"),
+                                                                                       ("September","September"),
+                                                                                       ("October","October"),
+                                                                                       ("November","November"),
+                                                                                       ("December","December")],
+                                                                                        default="")
+    expirationYear = SelectField("Expiration Year ",[validators.DataRequired()],choices=[("","Please Select:"),
+                                                                                       ("2017","2017"),
+                                                                                       ("2018", "2018"),
+                                                                                       ("2019", "2019"),
+                                                                                       ("2020", "2020"),
+                                                                                       ("2021","2021"),
+                                                                                       ("2022","2022"),
+                                                                                       ("2023","2023")],
+                                                                                        default="")
+    cvcode = IntegerField("Card CV ",[validators.DataRequired()])
 #Book Booking Page aka create_publications
 @app.route('/bookingPage',methods=["GET","POST"]) #@app.route('/newpublication')
 def bookingpage():
@@ -249,6 +278,9 @@ def delete_booking(id):
     flash('Appoinment Cancelled','success')
 
     return redirect(url_for('view_Booking_Page'))
+
+
+
 
 if __name__ == '__main__':
     app.secret_key = "helloworld"

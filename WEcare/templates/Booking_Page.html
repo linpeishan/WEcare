@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" >
     <title>WEcare</title>
     <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
         #booking-box{
             position:relative;
             width: 850px;
@@ -11,29 +12,44 @@
         }
         .left{
             position: absolute;
-            left:0;
+            left:243px;
             padding:40px;
             width: 450px;
             height: 400px;
-            color:#f7f4f4;
         }
+
         #left{
-            background: url('https://www.xmple.com/wallpaper/linear-red-gradient-3200x1800-c2-8b0000-dc143c-a-285-f-14.svg');
+            background: url('https://www.hiresafe.com/wp-content/uploads/fl-builder/cache/medical-background-check-1-square.jpg');
+            background-size: cover;
+            background-position: center;
+            background-color: rgba(0,0,0,0.5);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-            border-radius: 0 2px 2px 0;
+            border-radius: 2%;
+        }
+        table:hover{
+            box-shadow: 100px 2px 2px 2px #afeeee;
         }
         .right{
             position: absolute;
-            right:0;
+            right:-290px;
             padding:40px;
             width: 450px;
             height: 400px;
         }
-        img{
-            opacity: 0.5;
-            width:40px;
-            left: 0;
-            bottom: 0;
+        #right{
+            background:url(https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/itCjTBE/medical-abstract-background-with-health-icons-video-animation-hd-1920x1080_v81imnt8e__F0014.png);
+
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            border-radius: 2%;
+        }
+        body{
+            font-family: 'Roboto', sans-serif;
+        }
+        #left tr:hover{
+            background-color: #5488B2;
+        }
+        #right tr:hover{
+            background-color: #cccccc;
         }
     </style>
 </head>
@@ -76,12 +92,16 @@
     </div>
     {% endif %}
     <!---End--->
-    <center>
+    <h2>Booking Page</h2>
+    <hr>
     <div id="booking-box">
     <form method="POST" action="">
         <div class = "left">
         <table class="table table-bordered" style="width:450px" id="left">
             <tbody>
+                <tr>
+                    <th><h3>Step 1: Application</h3></th>
+                </tr>
                 <tr>
                     <td>{{ render_field(form.type,class_="radio-inline") }}</td>
                 </tr>
@@ -107,16 +127,48 @@
                     <td>{{ render_field(form.startingDateAndTime,class_="form-control") }}</td>
                 </tr>
                 <tr>
-                    <td>
-                        <div class = "form-group col-md-1">
-                            <input type="submit" value="Submit" class="btn btn-info"/>
-                        </div>
-                    </td>
+                    <td><br></td>
                 </tr>
            </tbody>
         </table>
         </div>
+
+        <div class = "right">
+        <table class="table" style="width:450px" id="right">
+            <tbody>
+                <tr>
+                    <th><h3>Step 2: Payment</h3></th>
+                </tr>
+                <tr>
+                    <td>{{ render_field(form.cardType,class_="radio-inline") }}</td>
+                </tr>
+                <tr>
+                    <td>{{ render_field(form.cardName,class_="form-control") }}</td>
+                </tr>
+                <tr>
+                    <td>{{ render_field(form.cardNumber,class_="form-control") }}</td>
+                </tr>
+                <tr>
+                    <td>{{ render_field(form.expirationMonth,class_="form-control") }}</td>
+                </tr>
+                <tr>
+                    <td>{{ render_field(form.expirationYear,class_="form-control") }}</td>
+                </tr>
+                <tr>
+                    <td>{{ render_field(form.cvcode,class_="form-control") }}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class = "form-group col-md-1">
+                            <br>
+                            <input type="submit" value="Submit" class="btn btn-success"/>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
     </form>
-    </center>
+
     </div>
 {% endblock %}
