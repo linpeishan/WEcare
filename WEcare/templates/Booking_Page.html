@@ -1,3 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WEcare</title>
+    <style>
+        #booking-box{
+            position:relative;
+            width: 850px;
+            height: 350px;
+        }
+        .left{
+            position: absolute;
+            left:0;
+            padding:40px;
+            width: 450px;
+            height: 400px;
+            color:#f7f4f4;
+        }
+        #left{
+            background: url('https://www.xmple.com/wallpaper/linear-red-gradient-3200x1800-c2-8b0000-dc143c-a-285-f-14.svg');
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            border-radius: 0 2px 2px 0;
+        }
+        .right{
+            position: absolute;
+            right:0;
+            padding:40px;
+            width: 450px;
+            height: 400px;
+        }
+        img{
+            opacity: 0.5;
+            width:40px;
+            left: 0;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
 <!---aka create_publications -->
 {% extends 'layout.html' %}
 {% block body %}
@@ -36,9 +77,10 @@
     {% endif %}
     <!---End--->
     <center>
+    <div id="booking-box">
     <form method="POST" action="">
-
-        <table class="table table-user-information" style="width:500px">
+        <div class = "left">
+        <table class="table table-bordered" style="width:450px" id="left">
             <tbody>
                 <tr>
                     <td>{{ render_field(form.type,class_="radio-inline") }}</td>
@@ -58,12 +100,9 @@
                 <tr id="doctor">
                     <td>{{ render_field(form.specialization1,class_="form-control") }}</td>
                 </tr>
-
-
                 <tr id="instructor">
                     <td>{{ render_field(form.specialization2,class_="form-control") }}</td>
                 </tr>
-
                 <tr>
                     <td>{{ render_field(form.startingDateAndTime,class_="form-control") }}</td>
                 </tr>
@@ -76,6 +115,8 @@
                 </tr>
            </tbody>
         </table>
+        </div>
     </form>
     </center>
+    </div>
 {% endblock %}
