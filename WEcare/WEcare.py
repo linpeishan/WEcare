@@ -107,23 +107,65 @@ class bookingPage(Form):#aka class PublicationForm(Form)
     type = RadioField('Choose type  ',[validators.DataRequired()],choices=[('idoctor','Doctor'),('iinstructor','Instructor')],default="idoctor")
     name = StringField("Name (Mr/Ms/Madam) ",[validators.Length(min=1,max=150),validators.DataRequired()],default="Bojack Horseman")
     age = IntegerField("Age ",[validators.DataRequired()],default=54)
-    phoneNumber = TextField("Number ",[validators.DataRequired()],default="08082716773") #kiv,will validate to sg number format
+    phoneNumber = TextField("Number ",[validators.DataRequired()],default="81345678") #kiv,will validate to sg number format
     email = EmailField("Email ", [validators.DataRequired(), validators.Email()],default="BoforGoJack@gmail.com")
     specialization1 = SelectField("Specialization(Doctors) ",[RequiredIf(type="idoctor")],choices=[("","Please Select:"),
-                                                                                      ("Bob Oakwell(General Medicine)","Bob Oakwell(General Medicine)"),
-                                                                                       ("Johnny Appleseed(Dermatology)","Johnny Appleseed(Dermatology)"),
-                                                                                       ("Kathy Dinkleberry(Internal Medicine)", "Kathy Dinkleberry(Internal Medicine)"),
-                                                                                      ("Neurologist", "Neurologist"),],
-                                                                                        default="")
+                                                                                                   ("Andrew(Anesthesiologist)","Andrew(Anesthesiologist)"),
+                                                                                                   ("Jack(Anesthesiologist)","Jack(Anesthesiologist)"),
+                                                                                                   ("Jacob(Anesthesiologist)", "Jacob(Anesthesiologist)"),
+                                                                                                   ("Jill(Anesthesiologist)", "Jill(Anesthesiologist)"),
+                                                                                                   ("Johnny(Anesthesiologist)","Johnny(Anesthesiologist)"),
+                                                                                                   ("Mason(Anesthesiologist)","Mason(Anesthesiologist)"),
+                                                                                                   ("Noah(Anesthesiologist)","Noah(Anesthesiologist)"),
+                                                                                                   ("Olivia(Anesthesiologist)","Olivia(Anesthesiologist)"),
+                                                                                                   ("Zoe(Anesthesiologist)","Zoe(Anesthesiologist)"),
+                                                                                                   ("Audrey(Allergist)","Audrey(Anesthesiologist)"),
+                                                                                                   ("David(Allergist)","David(Allergist)"),
+                                                                                                   ("Emma(Allergist)","Emma(Allergist)"),
+                                                                                                   ("Marcus(Allergist)","Marcus(Allergist)"),
+                                                                                                   ("Penelope(Allergist)","Penelope(Allergist)"),
+                                                                                                   ("Sophia(Allergist)","Sophia(Allergist)"),
+                                                                                                   ("Michael(Allergist)","Michael(Allergist)"),
+                                                                                                   ("Chuan Lim(Audiologist)","Chuan Lim(Audiologist)"),
+                                                                                                   ("Chloe(Audiologist)","Chloe(Audiologist)"),
+                                                                                                   ("Emily(Audiologist)","Emily(Audiologist)"),
+                                                                                                   ("Grace(Audiologist)","Grace(Audiologist)"),
+                                                                                                   ("Isabella(Audiologist)","Isabella(Audiologist)"),
+                                                                                                   ("Jayden(Audiologist)","Jayden(Audiologist)"),
+                                                                                                   ("Luke(Audiologist)","Luke(Audiologist)"),
+                                                                                                   ("Will Smith(Audiologist)","Will Smith(Audiologist)"),
+                                                                                                   ("Adam(Dentist)","Adam(Dentist)"),
+                                                                                                   ("Andrian(Dentist)","Andrian(Dentist)"),
+                                                                                                   ("Aria(Dentist)","Aria(Dentist)"),
+                                                                                                   ("Eva(Dentist)","Eva(Dentist)"),
+                                                                                                   ("Hannah(Dentist)","Hannah(Dentist)"),
+                                                                                                   ("Jamie Foxx(Dentist)","Jamie Foxx(Dentist)"),
+                                                                                                   ("Jordan(Dentist)","Jordan(Dentist)"),
+                                                                                                   ("Nicholas(Dentist)","Nicholas(Dentist)"),
+                                                                                                   ("Spencer(Dentist)","Spencer(Dentist)"),
+                                                                                                   ],
+                                                                                                    default="")
     specialization2 =SelectField("Specialization(Instructors) ",[RequiredIf(type="iinstructor")],choices=[("","Please Select:"),
-                                                                                            ("Bob Oakwell's Dancing Academy(Hip Hop)", "Bob Oakwell's Dancing Academy(Hip Hop)"),
-                                                                                            ( "Bob Oakwell's Dancing Academy(Zumba)","Bob Oakwell's Dancing Academy(Zumba)"),
+                                                                                                          ("Andian(Yoga)", "Andian(Yoga)"),
+                                                                                                          ("Arthur(Yoga)","Arthur(Yoga)"),
+                                                                                                          ("Aria(Yoga)","Aria(Yoga)"),
+                                                                                                          ("Ashton(Yoga)","Ashton(Yoga)"),
+                                                                                                          ("Ali(Yoga)","Ali(Yoga)"),("Cameron(Yoga)","Cameron(Yoga)"),
+                                                                                                          ("Cameron(Yoga)","Cameron(Yoga)"),
+                                                                                                          ("Hannah(Yoga)","Hannah(Yoga)"),
+                                                                                                          ("Mary(Yoga)","Mary(Yoga)"),
+                                                                                                          ("Samuel(Zumba)","Samuel(Yoga)"),
+                                                                                                          ("Caleb(Zumba)","Caleb(Zumba)"),
+                                                                                                          ("David(Zumba)","David(Zumba)"),
+                                                                                                          ("Daniel(Zumba)","Daniel(Zumba)"),
+                                                                                                          ("Dylan(Zumba)","Dylan(Zumba)"),
+                                                                                                          ("Eden(Zumba)","Eden(Zumba)"),
+                                                                                                          ("Edward(Zumba)","Edward(Zumba)"),
+                                                                                                          ("Jim(Zumba)","Jim(Zumba)"),
+                                                                                                          ("Rayson(Zumba)","Rayson(Zumba)"),
 
-                                                                                           ("Johnny Appleseed's Sports School(Yoga)", "Johnny Appleseed's Sports School(Yoga)"),
-                                                                                           ("Johnny Appleseed's Sports School(Zumba)","Johnny Appleseed's Sports School(Zumba)"),
-                                                                                           ("Kathy Dinkleberry's Fitness(Masala Bhangra)", "Kathy Dinkleberry's Fitness(Masala Bhangra)"),
-                                                                                           ("Kathy Dinkleberry's Fitness(Piloxing)","Kathy Dinkleberry's Fitness(Piloxing)")],
-                                                                                            default="")
+                                                                                                          ],
+                                                                                                           default="")
     # startingDateAndTime = DateTimeField("Starting Date & Time ",[validators.DataRequired()], format='%Y-%m-%d %H:%M:%S')
     startingDateAndTime = TextField("Starting Date & Time ", [validators.DataRequired()])
 #credit card page
