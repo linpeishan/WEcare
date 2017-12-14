@@ -19,9 +19,37 @@ root = db.reference()
 app = Flask(__name__)
 
 #-----------------------------------------------------------------------------------------------------------------------------------
-@app.route('/home')
+
+@app.route('/')
 def home():
-    return render_template('home.html')
+    bookings = root.child('bookings').get()
+    list = [] #store booking objects
+
+    for typeid in bookings:
+
+        eachbooking = bookings[typeid]
+
+        if eachbooking['type'] == 'idoctor':
+            doctor = Doctor(eachbooking['name'],eachbooking['age'],
+                            eachbooking['phoneNumber'],eachbooking['email'],
+                            eachbooking['startingDateAndTime'],eachbooking['type'],
+                            eachbooking['specialization1'])
+            doctor.set_typeid(typeid)
+            print(doctor.get_typeid())
+            list.append(doctor)
+            flash(doctor.get_name()+" has booked "+doctor.get_specialization1()+" on "+doctor.get_startingDateAndTime()+". Click 'Appointment Details' to find out more.",'success')
+        elif eachbooking['type'] == 'iinstructor':
+            instructor = Instructor(eachbooking['name'],eachbooking['age'],
+                            eachbooking['phoneNumber'],eachbooking['email'],
+                            eachbooking['startingDateAndTime'],eachbooking['type'],
+                            eachbooking['specialization2'])
+            instructor.set_typeid(typeid)
+            print(instructor.get_typeid())
+            list.append(instructor)
+            flash(instructor.get_name()+" has booked "+instructor.get_specialization2()+" on "+instructor.get_startingDateAndTime()+". Click 'Appointment Details' to find out more.",'success')
+
+
+    return render_template('home.html',bookings = list)
 @app.route('/videoChat')
 def videoChat():
     return render_template('VideoChat.html')
@@ -45,7 +73,7 @@ def view_Booking_Page():
             doctor.set_typeid(typeid)
             print(doctor.get_typeid())
             list.append(doctor)
-        else:
+        elif eachbooking['type'] == 'iinstructor':
             instructor = Instructor(eachbooking['name'],eachbooking['age'],
                             eachbooking['phoneNumber'],eachbooking['email'],
                             eachbooking['startingDateAndTime'],eachbooking['type'],
@@ -53,7 +81,8 @@ def view_Booking_Page():
             instructor.set_typeid(typeid)
             print(instructor.get_typeid())
             list.append(instructor)
-
+        else:
+            flash("You have no appointments.")
     return render_template('view_Booking_Page.html',bookings = list)
 
 
@@ -81,16 +110,19 @@ class bookingPage(Form):#aka class PublicationForm(Form)
     phoneNumber = TextField("Number ",[validators.DataRequired()],default="08082716773") #kiv,will validate to sg number format
     email = EmailField("Email ", [validators.DataRequired(), validators.Email()],default="BoforGoJack@gmail.com")
     specialization1 = SelectField("Specialization(Doctors) ",[RequiredIf(type="idoctor")],choices=[("","Please Select:"),
-                                                                                       ("Dermatology","Dermatology"),
-                                                                                       ("General Medicine", "General Medicine"),
-                                                                                       ("Internal Medicine", "Internal Medicine"),
-                                                                                       ("Neurologist", "Neurologist"),],
+                                                                                      ("Bob Oakwell(General Medicine)","Bob Oakwell(General Medicine)"),
+                                                                                       ("Johnny Appleseed(Dermatology)","Johnny Appleseed(Dermatology)"),
+                                                                                       ("Kathy Dinkleberry(Internal Medicine)", "Kathy Dinkleberry(Internal Medicine)"),
+                                                                                      ("Neurologist", "Neurologist"),],
                                                                                         default="")
     specialization2 =SelectField("Specialization(Instructors) ",[RequiredIf(type="iinstructor")],choices=[("","Please Select:"),
-                                                                                           ("Yoga", "Yoga Instructor"),
-                                                                                           ("Zumba", "Zumba Instructor"),
-                                                                                           ("Hiphop", "Hip Hop Instructor"),
-                                                                                           ("Piloxing", "Masala Bhangra Instructor")],
+                                                                                            ("Bob Oakwell's Dancing Academy(Hip Hop)", "Bob Oakwell's Dancing Academy(Hip Hop)"),
+                                                                                            ( "Bob Oakwell's Dancing Academy(Zumba)","Bob Oakwell's Dancing Academy(Zumba)"),
+
+                                                                                           ("Johnny Appleseed's Sports School(Yoga)", "Johnny Appleseed's Sports School(Yoga)"),
+                                                                                           ("Johnny Appleseed's Sports School(Zumba)","Johnny Appleseed's Sports School(Zumba)"),
+                                                                                           ("Kathy Dinkleberry's Fitness(Masala Bhangra)", "Kathy Dinkleberry's Fitness(Masala Bhangra)"),
+                                                                                           ("Kathy Dinkleberry's Fitness(Piloxing)","Kathy Dinkleberry's Fitness(Piloxing)")],
                                                                                             default="")
     # startingDateAndTime = DateTimeField("Starting Date & Time ",[validators.DataRequired()], format='%Y-%m-%d %H:%M:%S')
     startingDateAndTime = TextField("Starting Date & Time ", [validators.DataRequired()])
@@ -123,6 +155,7 @@ class bookingPage(Form):#aka class PublicationForm(Form)
                                                                                         default="")
     cvcode = IntegerField("Card CV ",[validators.DataRequired()])
 #Book Booking Page aka create_publications
+
 @app.route('/bookingPage',methods=["GET","POST"]) #@app.route('/newpublication')
 def bookingpage():
     form = bookingPage(request.form)
@@ -149,7 +182,6 @@ def bookingpage():
                 'type': doctor.get_type(),
                 'specialization1': doctor.get_specialization1(),
             })
-
             flash("Your appointment is registered.", 'success')
 
         elif form.type.data == "iinstructor":
@@ -209,7 +241,7 @@ def update_bookings(id):
                 'specialization1': doctor.get_specialization1(),
             })
 
-            flash("Your appointment is registered.", 'success')
+            flash("Your appointment has been rescheduled", 'success')
 
         elif form.type.data == "iinstructor":
             name = form.name.data
@@ -234,7 +266,7 @@ def update_bookings(id):
                 'specialization2' : instructor.get_specialization2(),
             })
 
-            flash('Your appointment is registered.', 'success')
+            flash('Your appointment has been rescheduled.', 'success')
 
         return redirect(url_for('view_Booking_Page'))
     else:

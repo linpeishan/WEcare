@@ -92,7 +92,7 @@
     </div>
     {% endif %}
     <!---End--->
-    <h2>Booking Page</h2>
+    <center><h2>Booking Page</h2></center>
     <hr>
     <div id="booking-box">
     <form method="POST" action="">
@@ -124,7 +124,7 @@
                     <td>{{ render_field(form.specialization2,class_="form-control") }}</td>
                 </tr>
                 <tr>
-                    <td>{{ render_field(form.startingDateAndTime,class_="form-control") }}</td>
+                    <td data-toggle="tooltip" title="eg. 2017-12-15 23:59:59">{{ render_field(form.startingDateAndTime,class_="form-control") }}</td>
                 </tr>
                 <tr>
                     <td><br></td>
@@ -171,4 +171,9 @@
     </form>
 
     </div>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
 {% endblock %}
