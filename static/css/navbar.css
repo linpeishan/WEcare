@@ -1,0 +1,29 @@
+a:link {
+    text-decoration: none;
+    color: white;
+}
+
+a:visited {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    text-decoration: none;
+    color: white;
+}
+
+a:active {
+    text-decoration: none;
+    color: white;
+}
+.navbar{
+    font-size: medium;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 2px 2px 5px rgb(130, 130, 130);
+}
+img{
+    position: relative;/* Declared position allows for location changes */
+    top: -15px;
+}

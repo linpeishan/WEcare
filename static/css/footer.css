@@ -1,0 +1,33 @@
+.footer{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 4px;
+    background: rgb(217, 217, 217);
+    padding: 20px 0px 20px 10px;
+
+}
+li{
+	display:block;
+}
+.what{
+	display:inline-block;
+}
+#logoFooter{
+	width:120px;
+	height:80px;
+}
+
+#small{
+	text-align:left;
+    font-size:12px;
+}
+.lala{
+	font-size:13px;
+}
+
+.outer{
+    font-size: 18.6px;
+    font-family: SansSerif,SansSerif,Arial;
+}

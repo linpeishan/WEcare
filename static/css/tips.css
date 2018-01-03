@@ -1,0 +1,16 @@
+a:link {
+    text-decoration: none;
+}
+h1 {
+    font-family: Georgia;
+    font-size: 18px;
+}
+article {
+    margin: 0 0 10px 0;
+}
+img {
+    width: 250px;
+}
+div {
+    margin: 0 0 0 50px;
+}
