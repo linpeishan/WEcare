@@ -20,36 +20,9 @@ app = Flask(__name__)
 
 #-----------------------------------------------------------------------------------------------------------------------------------
 
-@app.route('/')
+@app.route('/home')
 def home():
-    bookings = root.child('bookings').get()
-    list = [] #store booking objects
-
-    for typeid in bookings:
-
-        eachbooking = bookings[typeid]
-
-        if eachbooking['type'] == 'idoctor':
-            doctor = Doctor(eachbooking['name'],eachbooking['age'],
-                            eachbooking['phoneNumber'],eachbooking['email'],
-                            eachbooking['startingDateAndTime'],eachbooking['type'],
-                            eachbooking['specialization1'])
-            doctor.set_typeid(typeid)
-            print(doctor.get_typeid())
-            list.append(doctor)
-            flash(doctor.get_name()+" has booked "+doctor.get_specialization1()+" on "+doctor.get_startingDateAndTime()+". Click 'Appointment Details' to find out more.",'success')
-        elif eachbooking['type'] == 'iinstructor':
-            instructor = Instructor(eachbooking['name'],eachbooking['age'],
-                            eachbooking['phoneNumber'],eachbooking['email'],
-                            eachbooking['startingDateAndTime'],eachbooking['type'],
-                            eachbooking['specialization2'])
-            instructor.set_typeid(typeid)
-            print(instructor.get_typeid())
-            list.append(instructor)
-            flash(instructor.get_name()+" has booked "+instructor.get_specialization2()+" on "+instructor.get_startingDateAndTime()+". Click 'Appointment Details' to find out more.",'success')
-
-
-    return render_template('home.html',bookings = list)
+    return render_template('home.html')
 @app.route('/videoChat')
 def videoChat():
     return render_template('VideoChat.html')
@@ -169,14 +142,14 @@ class RequiredIf(object):
                     validators.Optional().__call__(form, field)
 #end
 class QueryPage():
-    def _init__(self, query):
-        self._query = query
+    def __init__(self, query):
+        self.__query = query
 
     def get_query(self):
-        return self._query
+        return self.__query
 
     def set_query(self, query):
-        self._query= query
+        self.__query= query
 
 class queryPage(Form):
     query = TextField("Query", [validators.DataRequired()])
@@ -197,7 +170,7 @@ def query():
         newquery_sent.push({
             'query': newquery.get_query()
         })
-        flash('Magazine Inserted Sucessfully.', 'success')
+        flash('Query Submitted Sucessfully.', 'success')
 
         return render_template('home.html', form=form)
     return render_template('QueryPage.html', form=form)
