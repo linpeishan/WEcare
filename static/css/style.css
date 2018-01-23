@@ -1,0 +1,30 @@
+video {
+  background-color: #ddd;
+  border-radius: 7px;
+  margin: 10px 0px 0px 10px;
+  width: 320px;
+  height: 240px;
+}
+
+hr{
+	border: 2px dotted rgb(217, 217, 217);
+}
+.onlineVideo{
+	font-family: "Georgia", Verdana;
+}
+#note{
+	margin-left:23px;
+	font-family: "Georgia", Verdana;
+}
+#note2{
+	font-family: "Georgia", Verdana;
+}
+
+#key{
+	border: 0.5px solid grey;
+	border-radius: 3px;
+	padding: 4px;
+	background-color: #efefef;
+}
+
+

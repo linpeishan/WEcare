@@ -1,0 +1,185 @@
+<html>
+  <head>
+    <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+    <!--- BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <style>
+        .gUMArea{
+            border: 0.5px solid grey;
+        }
+        #call{
+          margin: 5px 0px 0px 10px !important;
+          width: 35%;
+        }
+    </style>
+  </head>
+  {% extends 'layout.html' %}
+  {% block body %}
+
+  <center>
+  <br>
+  <h1 class="onlineVideo"> Online Video Consultation </h1>
+  <hr>
+
+  <p id = "note2"> Hi, welcome to our Online Video Consultation! Simply press <strong><em>call</em></strong> to contact our doctors! </p>
+  <p id = "note2"> Please <strong><em>enable</em></strong> your microphone and camera. </p>
+  <p id = "note2"> If your computer does not have one,you can still communicate with the doctor as they will be operating their microphone and camera. </p>
+  <p id = "note2"> Press <strong><span id="key">Enter</span></strong> to view full screen. Press <strong><span id="key"> Esc </span></strong> &nbsp;to exit. </p>
+  <p id = "note2"> To <strong><em>hang up</em></strong> the Video Call, simply <strong><em>close the browser</em></strong>! </p>
+  <hr>
+    <!---- Delete if there's a problem --->
+
+    <div id='gUMArea' class="gUMArea">
+       <h4><strong>Recording type:</strong></h4>
+       <div class="radio">
+        <input type="radio" name="media" value="video" checked id='mediaVideo'> Video
+       </div>
+       <div class="radio">
+        <input type="radio" name="media" value="audio"> Audio
+       </div>
+       <br>
+       <button class="btn btn-primary" id='gUMbtn'>Start Recording</button>
+    <p></p>
+    <div id='btns'>
+      <button class="btn btn-default" id='start' disabled>Start</button>
+      <button class="btn btn-default" id='stop' disabled>Stop</button>
+      <p></p>
+    </div>
+    </div>
+    <!---end---->
+  <body onload="showLocalVideo()">
+  <div class="container">
+      <div class="col">
+          <div class="col-md-6">
+              <div class="embed-responsive embed-responsive-4by3">
+                  <video id="localVideo" autoplay muted></video>
+
+              </div>
+          </div>
+      </div>
+      <div class="col">
+          <div class="col-md-6">
+              <div class="embed-responsive embed-responsive-4by3">
+                  <video id="remoteVideo" autoplay></video>
+
+              </div>
+          </div>
+      </div>
+  </div>
+
+    <br />
+    <button onclick="showRemoteVideo()" type="button" class="btn btn-success btn-lg" id="call"><span class="glyphicon glyphicon-earphone"></span> Call </button>
+
+	</center>
+	<br>
+	<br>
+	<small id="note"><strong> *****Please note that this video chat does not support Internet Explorer and Firefox. *****</strong></small>
+	<br>
+	<br>
+	<script src="static/js/script.js"></script>
+<!--- Delete if there's a problem -->
+
+<div>
+  <ul class="list-unstyled" id='ul'></ul>
+</div>
+<script>
+'use strict'
+
+let log = console.log.bind(console),
+  id = val => document.getElementById(val),
+  ul = id('ul'),
+  gUMbtn = id('gUMbtn'),
+  start = id('start'),
+  stop = id('stop'),
+  stream,
+  recorder,
+  counter = 1,
+  chunks,
+  media;
+
+
+gUMbtn.onclick = e => {
+  let mv = id('mediaVideo'),
+    mediaOptions = {
+      video: {
+        tag: 'video',
+        type: 'video/webm',
+        ext: '.mp4',
+        gUM: {
+          video: true,
+          audio: true
+        }
+      },
+      audio: {
+        tag: 'audio',
+        type: 'audio/ogg',
+        ext: '.ogg',
+        gUM: {
+          audio: true
+        }
+      }
+    };
+  media = mv.checked ? mediaOptions.video : mediaOptions.audio;
+  navigator.mediaDevices.getUserMedia(media.gUM).then(_stream => {
+    stream = _stream;
+    //id('gUMArea').style.display = 'none';
+    gUMbtn.disabled = true;
+    start.removeAttribute('disabled');
+    stop.removeAttribute('disabled');
+    id('btns').style.display = 'inherit';
+    start.removeAttribute('disabled');
+    recorder = new MediaRecorder(stream);
+    recorder.ondataavailable = e => {
+      chunks.push(e.data);
+      if (recorder.state == 'inactive') makeLink();
+    };
+    log('got media successfully');
+  }).catch(log);
+}
+
+start.onclick = e => {
+  start.disabled = true;
+  stop.removeAttribute('disabled');
+  chunks = [];
+  recorder.start();
+}
+
+
+stop.onclick = e => {
+  stop.disabled = true;
+  recorder.stop();
+  gUMbtn.removeAttribute('disabled');
+}
+
+
+
+function makeLink() {
+  let blob = new Blob(chunks, {
+      type: media.type
+    }),
+    url = URL.createObjectURL(blob),
+    li = document.createElement('li'),
+    mt = document.createElement(media.tag),
+    hf = document.createElement('a');
+  mt.controls = true;
+  mt.src = url;
+  hf.href = url;
+  hf.download = `${counter++}${media.ext}`;
+  hf.innerHTML = `download ${hf.download}`;
+  li.appendChild(mt);
+  li.appendChild(hf);
+  ul.appendChild(li);
+}
+</script>
+
+
+<!----js--->
+<!-------------------------->
+
+<!--- End --->
+  {% endblock %}
+  </body>
+</html>
+
+

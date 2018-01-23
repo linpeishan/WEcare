@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block body %}
+    <center>
+
+        <h2>Appointment Details</h2>
+        <br>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th><center>Type: </center></th>
+            <th><center>Specialization: </center></th>
+            <th><center>Name: </center></th>
+            <th><center>Age: </center></th>
+            <th><center>Contact: </center></th>
+            <th><center>Date & Time: </center></th>
+            <th></th>
+            <th><br></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for booking in bookings %}
+            <tr>
+                {% if booking.get_type() == 'idoctor'%}
+                    <td><center>Doctor Appointment</center></td>
+                    <td><center>{{ booking.get_specialization1() }}</center></td>
+                {% elif booking.get_type() == 'iinstructor' %}
+                    <td><center>Instructor Appointment</center></td>
+                    <td><center>{{ booking.get_specialization2() }}</center></td>
+
+                {% endif %}
+                <td> <center>{{ booking.get_name() }}</center></td>
+                <td> <center>{{ booking.get_age() }}</center></td>
+                <td> <center>{{ booking.get_phoneNumber() }}</center></td>
+                <td> <center>{{ booking.get_startingDateAndTime() }}</center></td>
+                <!---Add Kam's code here!!!--->
+                <!---Start--->
+                <td><a href="/videoChat" class="btn btn-success"><span class="glyphicon glyphicon-facetime-video"></span>&nbsp Video Chat &nbsp</a></td>
+                <td><a href="/chatpage" class="btn btn-success"><span class="glyphicon glyphicon-envelope"></span>&nbsp Chat &nbsp</a></td>
+                <!--- End--->
+                <td><a href="/update/{{booking.get_typeid()}}" class="btn btn-warning">&nbsp Change Date/Time &nbsp</a></td>
+                <td><form action="{{ url_for('delete_booking',id=booking.get_typeid())}}" method="post">
+                    <input type= "submit" value = "Cancel" class="btn btn-danger" onclick="return confirm('Are you sure?');"></form></td>
+                <td></td>
+            </tr>
+        {% else: %}
+            <td colspan="8"><center>No appointment found</center></td>
+        {% endfor %}
+        </tbody>
+    </table>
+    </center>
+
+
+{% endblock %}
