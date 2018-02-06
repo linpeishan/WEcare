@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block additionalscripts %}
+<link rel="stylesheet" type="text/css" href="../../static/css/doctor_instructor.css" />
+{% endblock %}
+
+{% block body %}
+    <body style="background-image: url('https://i.pinimg.com/736x/27/27/8f/27278f98e97be201b7a06e57126f9af3.jpg');background-size: cover;">
+        {% for account in accounts %}
+            <div id="content" style="float:left; width: 650px; padding-left: 100px; padding-top: 50px; padding-bottom: 50px;";>
+                <section id="left">
+                    <div id="userStats" class="clearfix">
+                        <div class="pic">
+                            <a href="#">
+                                <img  src="../../static/images/user.png" style="width: 164px;">
+                            </a>
+                        </div>
+                        <div class="data">
+                            <h1 style="margin-bottom: 2px;font-family: Arial; font-size:14px">{{ account.get_firstName()+" "+ account.get_lastName() }}</h1>
+                            <h2 style="margin-top: 0px;font-family: Arial; margin-bottom: 0px;font-size:12px">Specialization: {{ account.get_specialization2() }}</h2>
+                            <h4 style="margin-top: 5px;font-family: Arial; font-size:12px">Age: {{ account.get_age() }}</h4>
+                            <h3 style="margin-top: 5px;font-size:12px">Contact No: +65 {{ account.get_contactNumber() }}</h3>
+
+                            <div class="sep" style="margin-top: 10px;"></div>
+                            <ul class="numbers clearfix">
+                                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<a href ="/bookingPage" style="text-decoration:none;color: white;"><button type="button" class="btn btn-success">Book Now</button></a>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        {% endfor %}
+    </body>
+{% endblock %}

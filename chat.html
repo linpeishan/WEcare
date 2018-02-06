@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+
+<head>
+
+    <script>
+        if(!location.hash.replace('#', '').length) {
+            location.href = location.href.split('#')[0] + '#' + (Math.random() * 100).toString().replace('.', '');
+            location.reload();
+        }
+        document.createElement('article');
+        document.createElement('footer');
+    </script>
+
+</head>
+
+{% block additionalscripts %}
+
+{% endblock %}
+
+{% block body %}
+    <body style="background-image: url('https://data.whicdn.com/images/248916848/large.jpg');background-size: cover;">
+        <br style="line-height: 50px;">
+
+        <article>
+            <header style="text-align: center;">
+                <h1>
+                  Welcome to WeCare Chat!
+                </h1>
+            </header>
+        <section class="experiment">
+            <center>
+                <table style="font-family: arial, sans-serif;border-collapse: collapse;width: 70%;">
+
+                    <tr class="visible" style="margin-bottom: 0px;background-color: #dddddd;">
+                        <td style="text-align: right;width: 10%!important; text-align: left; padding: 8px;">
+                            <input type="text" id="conference-name" placeholder=" Hangout Name..." style="width: 100%; height:40px;">
+                        </td>
+                        <td style="width: 20%!important; text-align: left; padding: 8px">
+                            <center><button class="btn btn-success" id="start-conferencing" href="#">Start Chat</button></center>
+                        </td>
+                    </tr>
+
+                    <tr id="rooms-list" class="visible"></tr>
+
+                    <tr id="chat-table" class="center-table visible "style="margin-bottom: 0px;background-color: #dddddd;" >
+                        <td style="width: 85%!important; text-align: left; padding: 8px">
+                            <textarea rows="4" cols="50" placeholder="Text your Message..." id="chat-message" size="100" style="width: 100%; height:200px; "></textarea>
+                        </td>
+
+                        <td style="width: 15%!important; text-align: left; padding: 8px">
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <center><button class="btn btn-success" id="post-chat-message"><span class="glyphicon glyphicon-send"></span> Send</button></center>
+                        </td>
+                    </tr>
+
+                    <tr id="chat-output" class="visible"></tr>
+
+                </table>
+            </center>
+        </section>
+
+
+
+            <!-- </HTML code for you> ::: end copy this section! -->
+            <script src="https://cdn.webrtc-experiment.com/socket.io.js"></script>
+            <script src="https://cdn.webrtc-experiment.com/RTCPeerConnection-v1.5.js"> </script>
+            <script src="https://cdn.webrtc-experiment.com/chat-hangout/hangout.js"> </script>
+            <script src="https://cdn.webrtc-experiment.com/chat-hangout/hangout-ui.js"> </script>
+        </article>
+
+        <br style="line-height: 50px;">
+    </body>
+{% endblock %}
