@@ -1,15 +1,9 @@
 video {
-  background-color: rgb(217, 217, 217);
-  border-radius: 10px;
-  border: 5px solid gray;
-  margin: 40px 0 0 0px;
-  width: 640px;
-  height:360px;
-  filter: hue-rotate(18deg) saturate(100%);
-}
-button {
-  margin: 10px 0px 0px 10px !important;
-  width: 340px;
+  background-color: #ddd;
+  border-radius: 7px;
+  margin: 10px 0px 0px 10px;
+  width: 320px;
+  height: 240px;
 }
 hr{
 	border: 2px dotted rgb(217, 217, 217);
@@ -23,7 +17,6 @@ hr{
 }
 #note2{
 	font-family: "Georgia", Verdana;
-	border:
 }
 
 #key{
@@ -32,3 +25,5 @@ hr{
 	padding: 4px;
 	background-color: #efefef;
 }
+
+

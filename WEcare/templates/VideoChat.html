@@ -1,9 +1,54 @@
-<html>
+<!DOCTYPE html>
   <head>
     <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
     <!--- BOOTSTRAP CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <style>
+
+        #call{
+          margin: -45px 0px 0px 0px !important;
+          width: 15%;
+        }
+        #chat{
+          margin: -45px 0px 0px 0px !important;
+          width: 15%;
+        }
+		h4 {
+			text-decoration: underline;
+		}
+        video {
+          background-color: #ddd;
+          border-radius: 7px;
+          margin: 10px 0px 0px 10px;
+          width: 320px;
+          height: 240px;
+        }
+        hr{
+            border: 2px dotted rgb(217, 217, 217);
+        }
+        .onlineVideo{
+            font-family: "Georgia", Verdana;
+        }
+        #note{
+            margin-left:23px;
+            font-family: "Georgia", Verdana;
+        }
+        #note2{
+            font-family: "Georgia", Verdana;
+        }
+
+        #key{
+            border: 0.5px solid grey;
+            border-radius: 3px;
+            padding: 4px;
+            background-color: #efefef;
+        }
+
+
+
+    </style>
   </head>
   {% extends 'layout.html' %}
   {% block body %}
@@ -19,18 +64,80 @@
   <p id = "note2"> Press <strong><span id="key">Enter</span></strong> to view full screen. Press <strong><span id="key"> Esc </span></strong> &nbsp;to exit. </p>
   <p id = "note2"> To <strong><em>hang up</em></strong> the Video Call, simply <strong><em>close the browser</em></strong>! </p>
   <hr>
-  <body onload="showLocalVideo()">
-    <video id="localVideo" autoplay muted></video>
-    <video id="remoteVideo" autoplay></video>
-    <br />
-    <button onclick="showRemoteVideo()" type="button" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span> Call</button>
+
+	<body onload="showLocalVideo()" style = "background-color: #fbfdff;">
+	<div class="container" style="margin-top:-75px">
+		<div class="col">
+			<div class="col-md-6">
+			<br>
+			<br>
+			<button id="record2" class="btn btn-default btn-lg">Start User Recording</button>
+			<br>
+			<br>
+				<div class="embed-responsive embed-responsive-4by3">
+					<video id="localVideo" autoplay muted></video>
+				</div>
+			</div>
+		</div>
+		<div class="col">
+			<div class="col-md-6">
+			<br>
+			<br>
+			<button type="button" class="btn btn-default btn-lg" id = "record">Start Consultant Recording</button>
+			<br>
+			<br>
+				<div class="embed-responsive embed-responsive-4by3">
+					<video id="remoteVideo" autoplay></video>
+				</div>
+			</div>
+		</div>
+	</div>
+	    <button onclick="showRemoteVideo()" type="button" class="btn btn-success btn-lg" id="call"><span class="glyphicon glyphicon-earphone"></span>&nbsp Call &nbsp</button>
+        <a href="/chat"><button type="button" class="btn btn-info btn-lg" id="chat"><span class="glyphicon glyphicon-envelope"></span>&nbsp Chat &nbsp</button></a>
+<!--- Delete if it fails --->
+	<div class = "container" style="margin-top:-45px">
+		<div class="col">
+			<div class="col-md-6">
+			<h4><b>User Recording</b></h4>
+            <div class="embed-responsive embed-responsive-4by3">
+                <video id="localVideoCapture" autoplay></video>
+            </div>
+			<br>
+			<button id="play2" class="btn btn-primary btn-lg" disabled>&nbsp Play &nbsp </button>
+			&nbsp
+			<button id="download2" class="btn btn-primary btn-lg" disabled>&nbsp Download &nbsp </button>
+		</div>
+		</div>
+
+		<div class="col">
+			<div class="col-md-6">
+                <h4><b>Consultant Recording</b></h4>
+            <div class="embed-responsive embed-responsive-4by3">
+                <video id="remoteVideoCapture" autoplay></video>
+			</div>
+			<br>
+			<button type="button" class="btn btn-primary btn-lg" id = "play" disabled>&nbsp Play &nbsp </button>
+			&nbsp
+			<button type="button" class="btn btn-primary btn-lg" id = "download" disabled>&nbsp Download &nbsp </button>
+			</div>
+		</div>
+<!--- End --->
+	</div>
+
+
 	</center>
 	<br>
 	<br>
 	<small id="note"><strong> *****Please note that this video chat does not support Internet Explorer and Firefox. *****</strong></small>
 	<br>
 	<br>
-	<script src="static/js/script.js"></script>
-  {% endblock %}
-  </body>
-</html>
+<script src="static/js/script.js">
+</script>
+
+
+<script src="static/js/record2.js">
+
+</script>
+<script src="static/js/record.js"></script>
+{% endblock %}
+</body>

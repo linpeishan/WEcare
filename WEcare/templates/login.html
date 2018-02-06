@@ -1,0 +1,62 @@
+<head>
+<style>
+  body{
+      background-image: url('https://wallpapertag.com/wallpaper/full/9/c/8/354183-ombre-background-1920x1080-full-hd.jpg');
+      background-size: cover;
+  }
+  .panel-body {
+      background: white;
+  }
+</style>
+</head>
+{% extends "layout.html" %}
+
+{% block body %}
+{% from "includes/_formhelper.html" import render_field %}
+
+<!--- block --->
+<br>
+    <div class="row">
+        <div class="container">
+            <div class="panel panel-default" style="max-width:350px;margin-left:auto;margin-right:auto;margin-top: auto;margin-bottom: auto" >
+                <div class="panel-heading">
+                    <h4 id="login-form-link"><a class="active" style="color: #222222">Login</a></h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form method="POST" action="" id="login-form">
+                                <div class="form-group">
+                                {{ render_field(form.username,class="form-control") }}
+                                {{ render_field(form.password,class="form-control") }}
+                                </div>
+                        </div>
+                                <div class="form-group col-md-1">
+                                    <input type="submit" value="Submit" class="btn btn-info"/>
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
+                                            Don't have an account!
+                                        <a href="/signup" style="color: #4087d4 ">
+                                            <i>Sign Up Here</i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}
+
+
+
+</body>
+
+
+
