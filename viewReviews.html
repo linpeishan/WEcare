@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block body %}
+
+{% for i in reviews %}
+    <li>{{ i.get_message() }}</li>
+{% endfor %}
+
+{% endblock %}
+
+{# update(?) #}
