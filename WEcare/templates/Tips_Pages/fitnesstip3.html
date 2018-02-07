@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block additionalscripts %}
+<link href="../../static/css/tips2.css" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block body %}
+{% for article in articles[2:3] %}
+    <br>
+    <button style="border-radius: 5px;" class="btn-success" onclick="goBack()">Go Back</button>
+    <h1 style="text-align: center">{{ article.get_title()}}</h1>
+    <br>
+    <p>{{ article.get_content()}}</p>
+    <br>
+{% endfor %}
+
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
+{% endblock %}

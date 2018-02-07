@@ -1,15 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>WEcare</title>
-</head>
-<body>
 {% extends 'layout.html' %}
-{% block body %}
 
-
+{%  block additionalscripts %}
+<link href="../../static/css/layout.css" rel="stylesheet" type="text/css" media="all">
+<link href="../../static/css/home.css" rel="stylesheet" type="text/css" media="all">
 {% endblock %}
 
-</body>
-</html>
+{% block body %}
+
+<div class="carousel fade-carousel slide" data-ride="carousel" data-interval="3000" id="bs-carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
+    <li data-target="#bs-carousel" data-slide-to="1"></li>
+    <li data-target="#bs-carousel" data-slide-to="2"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+      <img class="img-responsive" src="../../static/images/slide_1.jpeg" alt="slide-1">
+      <div class="hero">
+        <hgroup>
+            <h1>Doctor Consultation</h1>
+            <h3>Consult with a doctor through video or chat</h3>
+        </hgroup>
+          <a href="/doctor"><button class="btn success" role="button">Consult Now</button></a>
+      </div>
+    </div>
+    <div class="item">
+      <img class="img-responsive" src="../../static/images/slide_2.jpeg" alt="slide-2">
+      <div class="hero">
+        <hgroup>
+            <h1>Fitness Lessons</h1>
+            <h3>Attend an online fitness class</h3>
+        </hgroup>
+          <a href="/instructor"><button class="btn success" role="button">Join Now</button></a>
+      </div>
+    </div>
+    <div class="item">
+      <img class="img-responsive" src="../../static/images/slide_3.jpeg" alt="slide-3">
+      <div class="hero">
+        <hgroup>
+            <h1>Inquiry</h1>
+            <h3>Ask about your symptoms or any health inquiry to an actual doctor</h3>
+        </hgroup>
+        <a href="/enquiry"><button class="btn success" role="button">Ask Now</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper row3">
+  <section class="hoc container clear">
+    <!-- ################################################################################################ -->
+    <div class="btmspace-80 center">
+      <h3 class="nospace">Latest from Health <Tips></Tips></h3>
+    </div>
+    <div class="group">
+      <article class="one_quarter first">
+        <time class="block font-xs" datetime="2045-04-06">January 6, 2018</time>
+        <h4 class="nospace font-x1">How Breakfast Helps Your Metabolism</h4>
+        <p class="btmspace-30"></p>
+        <a href="#"><img class="btmspace-30" src="../../static/images/Pic1.png" alt=""></a>
+        <footer><a href="/tips-dietary">Read More &raquo;</a></footer>
+      </article>
+      <article class="one_quarter">
+        <time class="block font-xs" datetime="2045-04-05">February 5, 2018</time>
+        <h4 class="nospace font-x1">What are Trans Fat?</h4>
+        <br>
+        <p class="btmspace-30"></p>
+        <a href="#"><img class="btmspace-30" src="../../static/images/Pic2.png" alt=""></a>
+        <footer><a href="/tips-dietary">Read More &raquo;</a></footer>
+      </article>
+      <article class="one_quarter">
+        <time class="block font-xs" datetime="2045-04-04">February 4, 2018</time>
+        <h4 class="nospace font-x1">5 Health Benefits of going Vegan</h4>
+        <p class="btmspace-30"></p>
+        <a href="#"><img class="btmspace-30" src="../../static/images/Pic3.png" alt=""></a>
+        <footer><a href="/tips-dietary">Read More &raquo;</a></footer>
+      </article>
+      <article class="one_quarter">
+        <time class="block font-xs" datetime="2045-04-04">February 7, 2018</time>
+        <h4 class="nospace font-x1">6 Dance Cardio Workout Videos</h4>
+        <p class="btmspace-30"></p>
+        <a href="#"><img class="btmspace-30" src="../../static/images/Pic4.png" alt=""></a>
+        <footer><a href="/tips-fitness">Read More &raquo;</a></footer>
+      </article>
+    </div>
+    <!-- ################################################################################################ -->
+  </section>
+</div>
+{% endblock %}

@@ -1,60 +1,54 @@
-<!--Nav bar-->
-<!-- START -->
-<nav style="background-color: rgb(217, 217, 217);" class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false"
-                    aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <!--- WEcare Name/Logo -->
-            <a class="navbar-brand" href="/"><img style="height: 50px;width: 93px;" src="..\..\static\images\Website Logo.png"></a>
-            <!-- END -->
-        </div>
-        <!--- Home and Manage Publications --->
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/"><strong><span class="glyphicon glyphicon-home"></span> Home</strong></a></li>
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><strong><span class="glyphicon glyphicon-user"></span> Online Consultation</strong><span
-                        class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Doctors</a></li>
-                        <li><a href="#">Instructors</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Reviews</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><strong><span class="glyphicon glyphicon-info-sign"></span> Health Tips</strong><span
-                        class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Tips on Dietary</a></li>
-                        <li><a href="#">Tips on Fitness</a></li>
-                    </ul>
-                </li>
-                <li><a href="#"><strong><span class="glyphicon glyphicon-question-sign"></span> Query</strong></a></li>
-            </ul>
-            <!--- Sign up/ Login -->
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Logout</a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <span class="glyphicon glyphicon-th-list"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
-                        <li><a href="/view_Booking_Page"> <span class="glyphicon glyphicon-calendar"></span> Appointment Details</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#s"><span class="glyphicon glyphicon-list-alt"></span> Reviews</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+<body id="top">
+<div style="" class="wrapper row0">
+  <div id="topbar" class="hoc clear">
+    <!-- ################################################################################################ -->
+    <div class="fl_right">
+      <ul style="padding: 0;" class="nospace inline pushright">
+        {% if session.logged_in %}
+            <li><i class="fa fa-id-card-o"></i><a href="/">Profile</a></li>
+            <li><i class="fa fa-calendar-check-o"></i><a href="/">Appointments</a></li>
+            <li><i class="fa fa-sign-out"></i><a href="/logout">Logout</a></li>
+        {% else %}
+            <li><i class="fa fa-user"></i><a href="/">Register</a></li>
+            <li><i class="fa fa-sign-in"></i><a href="/login">Login</a></li>
+        {% endif %}
+      </ul>
     </div>
-</nav>
-
-<!-- END -->
+  </div>
+</div>
+<div class="bgded" style="background-color: rgb(74,76,84)">
+  <!-- ################################################################################################ -->
+  <div class="wrapper row1">
+    <header id="header" class="hoc clear">
+      <!-- ################################################################################################ -->
+      <div id="logo" class="fl_left">
+        <h1><a href="/home"><img style="height:50px; width: 100px; margin-top: -15px ;margin-left: -80px;margin-bottom: 0;margin-right: 100px" src="../../static/images/Logo.png"></a></h1>
+      </div>
+      <nav style="color:#A6A6A6; padding: 0;" id="mainav" class="fl_right">
+        <ul class="clear">
+          <li><a href="/home">Home</a></li>
+          <li><a class="drop" href="#">Online Consultation</a>
+            <ul>
+              <li><a href="/">Doctors</a></li>
+              <li><a href="/">Instructors</a></li>
+            </ul>
+          </li>
+          <li><a class="drop" href="#">Health Tips</a>
+            <ul>
+              <li><a href="/tips-dietary">Dietary Tips</a></li>
+              <li><a href="/tips-fitness">Fitness Tips</a>
+            </ul>
+          </li>
+          <li><a class="drop" href="#">Enquiry</a>
+            <ul>
+              <li><a href="/enquiry">Health Enquiry</a></li>
+              <li><a href="/enquirylistPB">Patient Enquiries</a></li>
+            </ul>
+          </li>
+          <li><a href="/">Reviews</a></li>
+        </ul>
+      </nav>
+    </header>
+  </div>
+</div>
+</body>

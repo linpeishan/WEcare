@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block additionalscripts %}
+{% endblock %}
+
+{% block body %}
+
+<h1 style="color: white;margin: 0;padding: 30px;background-position: center ;  background-image: url('../../static/images/fitpage.jpeg');text-align: center;">Fitness Tips</h1>
+
+<center>
+<div style="margin: -50px 0 0 0;" class="container">
+  <table style="list-style: none; text-align: center;" class="table table-bordered">
+    <tbody>
+      {% for article in articles %}
+      <tr>
+        <td>
+            {% if article.get_title() == '6 Dance Cardio Workout Videos That Will Get You Out of Your Exercise Rut' %}
+                <li><a href="/fitness-tip1">{{ article.get_title() }}</a></li>
+            {% elif article.get_title() == 'Want to Live Longer? Every Movement Counts, Even Cleaning the House' %}
+                <li><a href="/fitness-tip2">{{ article.get_title() }}</a></li>
+            {% elif article.get_title() == "Here's How Much You Need to Exercise to Make Up for a Day of Desk Sitting" %}
+                <li><a href="/fitness-tip3">{{ article.get_title() }}</a></li>
+            {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</center>
+
+{% endblock %}

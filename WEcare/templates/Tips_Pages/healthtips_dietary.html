@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block additionalscripts %}
+{% endblock %}
+
+{% block body %}
+<h1 style="color: white;margin: 0;padding: 30px;background-position: center bottom;background-size: auto; background-image: url('../../static/images/dietpage.jpeg');text-align: center;">Dietary Tips</h1>
+
+<center>
+<div style="margin: -50px 0 0 0;" class="container">
+  <table align="center" style="list-style: none; text-align: center;" class="table table-bordered">
+    <tbody>
+      {% for article in articles %}
+      <tr>
+        <td>
+            {% if article.get_title() == ' How Eating Breakfast Can Help Your Metabolism' %}
+                <li><a href="/dietary-tip1">{{ article.get_title() }}</a></li>
+            {% elif article.get_title() == 'What are Trans Fat?' %}
+                <li><a href="/dietary-tip2">{{ article.get_title() }}</a></li>
+            {% elif article.get_title() == '5 Health Benefits of going Vegan' %}
+                <li><a href="/dietary-tip3">{{ article.get_title() }}</a></li>
+            {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</center>
+
+{% endblock %}

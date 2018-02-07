@@ -1,68 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>WEcare</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--- BOOTSTRAP CSS -->
+    <title>WeCare</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="../../static/css/layout.css" rel="stylesheet" type="text/css" media="all">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!--BOOTSTRAP END-->
-    <!-- Footer Css! -->
-    <link href="../../static/css/footer.css" rel="stylesheet" type="text/css">
-    <!--- NAVBAR CSS -->
-    <!--<link href="../../static/css/navbar.css" rel="stylesheet" type="text/css">-->
+{#    <link href="../../static/css/layout.css" rel="stylesheet" type="text/css" media="all">#}
     <style>
-    a:link {
-        text-decoration: none;
-        color: white;
-    }
-
-    a:visited {
-        text-decoration: none;
-        color: white;
-    }
-
-    a:hover {
-        text-decoration: none;
-        color: white;
-    }
-
-    a:active {
-        text-decoration: none;
-        color: white;
-    }
-    .navbar{
-        font-size: medium;
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-    img{
-        position: relative;/* Declared position allows for location changes */
-        top: -15px;
-    }
+        ul {
+            list-style: none;
+        }
     </style>
 </head>
-<body>
-<!--- Bootstrap js -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-<!--- Navbar js -->
-<script src="../../static/js/navbar.js"></script>
+<body id="top">
+    <!-- JAVASCRIPTS -->
+    <script src="../../static/js/jquery.min.js"></script>
+    <script src="../../static/js/jquery.backtotop.js"></script>
+    <script src="../../static/js/jquery.mobilemenu.js"></script>
 
-<!--- START --->
-{% block additionalscripts %}{% endblock %}
+    {#Boostrap js#}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<div class="container-fluid">
-    {% include 'includes/_navbar.html' %}
-    {% include 'includes/_message.html' %}
-    {% block body %}{% endblock %}
-</div>
+    {%  block additionalscripts %}{% endblock %}
 
+    <div class="container-fluid">
+        {% include 'includes/_navbar.html' %}
+        {% include 'includes/_message.html' %}
+        {% block body %}{% endblock %}
+    </div>
 
-{# {% include 'includes/_footer.html' %}#}
-
-<!---end --->
+    {% include 'includes/_footer.html' %}
 </body>
 </html>

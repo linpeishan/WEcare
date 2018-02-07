@@ -1,0 +1,40 @@
+<head>
+    <style>
+        .container{
+            margin: 0 0 -150px 0;
+        }
+    </style>
+</head>
+
+{% extends "layout.html" %}
+
+{#{% block additionalscripts %}#}
+{#{% endblock %}#}
+
+{% block body %}
+    <br>
+    <h1 style="text-align: center">Patient Enquiries</h1>
+    {% for enquiry in enquiries %}
+        <div class="container">
+            <div class="well">
+                <div class="media">
+      	            <a class="pull-left" href="#">
+    		            <img class="media-object" src="https://www.shareicon.net/data/2016/07/05/791223_people_512x512.png" style="width: 150px; height: 150px;">
+  		            </a>
+  		            <div class="media-body">
+                        <p></p>
+                        <p>{{ enquiry.get_query() }}</p>
+                        <ul class="list-inline list-unstyled">
+                            <li><span><i class="glyphicon glyphicon-calendar"></i> {{ enquiry.get_date_time() }}</span></li>
+                            <li>|</li>
+                            <li>By {{ enquiry.get_created_by() }}</li>
+                            <li>|</li>
+                            <li><a href="/answerEnquiry/{{enquiry.get_enquiryid()}}"><button class="btn btn-primary" type="button">Answer</button></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <br style="line-height: 150px">
+{% endblock %}

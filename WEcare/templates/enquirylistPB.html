@@ -1,0 +1,75 @@
+<head>
+    <style>
+        .container{
+            margin: 0 0 -150px 0;
+        }
+        .panel {
+            padding: 50px;
+            display: none;
+            margin-top: 30px;
+            margin-right: 8.5%;
+            margin-left: 8.5%
+        }
+    </style>
+</head>
+
+{% extends "layout.html" %}
+
+{% block additionalscripts %}
+{% endblock %}
+
+{% block body %}
+    <br>
+    <h1 style="text-align: center">Patient Enquiries</h1>
+    {% for enquiry in enquiries %}
+        <div class="container">
+            <div class="well">
+                <div class="media">
+      	            <a class="pull-left" href="#">
+    		            <img class="media-object" src="https://www.shareicon.net/data/2016/07/05/791223_people_512x512.png" style="width: 150px; height: 150px;">
+  		            </a>
+  		            <div class="media-body">
+                        <p></p>
+                        <p>{{ enquiry.get_query() }}</p>
+                        <ul class="list-inline list-unstyled parent-list">
+                            <li><span><i class="glyphicon glyphicon-calendar"></i> {{ enquiry.get_date_time() }}</span></li>
+                            <li>|</li>
+                            <li>By {{ enquiry.get_created_by() }}</li>
+                            <li>|</li>
+                            <li style="color: blue" id="flip">Show Answer</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <br>
+    {% for answer in answers %}
+        {% if answer.get_enquiryid() == enquiry.get_enquiryid() %}
+        <div class="well panel">
+            <div class="media-body">
+                <p></p>
+                <p>{{ answer.get_answer() }}</p>
+                <ul class="list-inline list-unstyled">
+                    <li>Answered By Dr. {{ answer.get_doctorName() }}</li>
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+    {% endfor %}
+
+<br style="line-height: 150px">
+
+<script>
+
+$(document).ready(function() {
+    $('ul.parent-list li').click(function (e) {
+        $('.panel').slideToggle("slow");
+        $(this).text($(this).text() == 'Show Answer' ? 'Hide Answer' : 'Show Answer');
+        return false;
+    });
+});
+
+</script>
+
+{% endblock %}
